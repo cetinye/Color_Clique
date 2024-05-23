@@ -241,7 +241,7 @@ GameObject:
   - component: {fileID: 122850810}
   - component: {fileID: 122850809}
   m_Layer: 5
-  m_Name: Timer
+  m_Name: LevelTimer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1590,6 +1590,7 @@ MonoBehaviour:
   clickedImg: {fileID: 93169936}
   crowdAnimator: {fileID: 604847108}
   curtainAnimator: {fileID: 1981451024}
+  isFlashable: 1
 --- !u!1 &1155532652
 GameObject:
   m_ObjectHideFlags: 0
@@ -1777,7 +1778,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b92a35049ac797745b184497bfcde3cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeText: {fileID: 122850809}
+  levelTimeText: {fileID: 122850809}
+  flashInterval: 0.5
 --- !u!1 &1548053642
 GameObject:
   m_ObjectHideFlags: 0

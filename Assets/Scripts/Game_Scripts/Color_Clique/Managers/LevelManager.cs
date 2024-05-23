@@ -16,7 +16,7 @@ namespace Color_Clique
         private int numberOfSlots;
         private int rotationSpeed;
         private bool isTimerOn;
-        private float timer;
+        private float levelTimer;
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -24,6 +24,9 @@ namespace Color_Clique
         [SerializeField] Image clickedImg;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
+
+        [Header("Flash Interval")]
+        [SerializeField] private bool isFlashable = true;
 
         void Start()
         {
@@ -51,7 +54,7 @@ namespace Color_Clique
 
             numberOfSlots = levelSO.slotCount;
             rotationSpeed = levelSO.rotationSpeed;
-            timer = levelSO.time;
+            levelTimer = levelSO.time;
         }
 
         private void AssignWheelVariables()
@@ -63,17 +66,22 @@ namespace Color_Clique
         {
             if (!isTimerOn) return;
 
-            timer -= Time.deltaTime;
+            levelTimer -= Time.deltaTime;
 
-            if (timer < 0)
+            if (levelTimer < 0)
             {
                 isTimerOn = false;
-                timer = 0;
+                levelTimer = 0;
             }
 
-            uiManager.SetTimeText(timer);
+            if (levelTimer <= 5.2f && isFlashable)
+            {
+                isFlashable = false;
+                // GameManager.instance.PlayFx("Countdown", 0.7f, 1f);
+                uiManager.FlashRed();
+            }
 
-            //TODO: Flash Warning, NoInputWarning
+            uiManager.SetTimeText(levelTimer);
         }
 
         public void SpinWheel()
