@@ -1446,7 +1446,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 59fd2baab7940164a90f8df5eea8b348, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelId: 0
+  levelSO: {fileID: 0}
+  levels:
+  - {fileID: 11400000, guid: 9161e1d4318d8c44189364c2c68e238c, type: 2}
   numberOfSlots: 4
+  rotationSpeed: 0
   wheel: {fileID: 3565561663971928645}
   winnerImg: {fileID: 93169936}
   crowdAnimator: {fileID: 604847108}
@@ -3149,39 +3154,30 @@ MonoBehaviour:
   pitch: 1
   spinDuration: 10
   wheelSize: 1
-  wheelPieces:
-  - Icon: {fileID: 21300000, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-    Label: Lorem
-    Amount: 10
-    Chance: 100
-    Index: 0
-    _weight: 0
-  - Icon: {fileID: 21300002, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-    Label: Iposum
-    Amount: 20
-    Chance: 0
-    Index: 0
-    _weight: 0
-  - Icon: {fileID: 21300004, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-    Label: Tupala
-    Amount: 30
-    Chance: 0
-    Index: 0
-    _weight: 0
-  - Icon: {fileID: 21300030, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-    Label: Consectetur
-    Amount: 40
-    Chance: 0
-    Index: 0
-    _weight: 0
-  - Icon: {fileID: 21300008, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-    Label: Vallar
-    Amount: 60
-    Chance: 0
-    Index: 0
-    _weight: 0
+  wheelPieces: []
   needle: {fileID: 2053437661}
   wheelPiecesList: []
+  items:
+  - {fileID: 21300000, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300002, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300004, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300006, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300008, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300010, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300012, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300014, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300016, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300018, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300020, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300022, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300024, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300026, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300028, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300030, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300032, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300034, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300036, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300038, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
 --- !u!114 &3565621161520867275
 MonoBehaviour:
   m_ObjectHideFlags: 0

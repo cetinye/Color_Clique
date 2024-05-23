@@ -6,10 +6,8 @@ using System.Collections.Generic;
 
 namespace Color_Clique
 {
-
    public class PickerWheel : MonoBehaviour
    {
-
       [Header("References :")]
       [SerializeField] private GameObject linePrefab;
       [SerializeField] private Transform linesParent;
@@ -65,10 +63,13 @@ namespace Color_Clique
 
       private Tween tween;
       float prevAngle, currentAngle;
+      private int numberOfSlots;
+      [SerializeField] private List<Sprite> items = new List<Sprite>();
+      private List<Sprite> usedItems = new List<Sprite>();
 
-      private void Start()
+      public void Initialize()
       {
-         pieceAngle = 360 / wheelPieces.Length;
+         pieceAngle = 360 / numberOfSlots;
          halfPieceAngle = pieceAngle / 2f;
          halfPieceAngleWithPaddings = halfPieceAngle - (halfPieceAngle / 4f);
 
@@ -95,15 +96,30 @@ namespace Color_Clique
          wheelPiecePrefab = InstantiatePiece();
 
          RectTransform rt = wheelPiecePrefab.transform.GetChild(0).GetComponent<RectTransform>();
-         float pieceWidth = Mathf.Lerp(pieceMinSize.x, pieceMaxSize.x, 1f - Mathf.InverseLerp(piecesMin, piecesMax, wheelPieces.Length));
-         float pieceHeight = Mathf.Lerp(pieceMinSize.y, pieceMaxSize.y, 1f - Mathf.InverseLerp(piecesMin, piecesMax, wheelPieces.Length));
+         float pieceWidth = Mathf.Lerp(pieceMinSize.x, pieceMaxSize.x, 1f - Mathf.InverseLerp(piecesMin, piecesMax, numberOfSlots));
+         float pieceHeight = Mathf.Lerp(pieceMinSize.y, pieceMaxSize.y, 1f - Mathf.InverseLerp(piecesMin, piecesMax, numberOfSlots));
          rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, pieceWidth);
          rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, pieceHeight);
 
-         for (int i = 0; i < wheelPieces.Length; i++)
-            DrawPiece(i);
+         // for (int i = 0; i < numberOfSlots; i++)
+         //    DrawPiece(i);
 
-         Destroy(wheelPiecePrefab);
+         // Destroy(wheelPiecePrefab);
+
+         SpawnSlots();
+      }
+
+      private void SpawnSlots()
+      {
+         wheelPieces = new WheelPiece[numberOfSlots];
+
+         for (int i = 0; i < numberOfSlots; i++)
+         {
+            wheelPieces[i] = new WheelPiece();
+         }
+
+         for (int i = 0; i < numberOfSlots; i++)
+            DrawPiece(i);
       }
 
       private void DrawPiece(int index)
@@ -111,7 +127,7 @@ namespace Color_Clique
          WheelPiece piece = wheelPieces[index];
          Transform pieceTrns = InstantiatePiece().transform.GetChild(0);
 
-         pieceTrns.GetChild(0).GetComponent<Image>().sprite = piece.Icon;
+         piece.Icon = pieceTrns.GetChild(0).GetComponent<Image>().sprite = GetRandomItem();
          // pieceTrns.GetChild(1).GetComponent<Text>().text = piece.Label;
          // pieceTrns.GetChild(2).GetComponent<Text>().text = piece.Amount.ToString();
          wheelPiecesList.Add(pieceTrns.GetChild(0).GetComponent<RectTransform>());
@@ -128,6 +144,25 @@ namespace Color_Clique
          return Instantiate(wheelPiecePrefab, wheelPiecesParent.position, Quaternion.identity, wheelPiecesParent);
       }
 
+      private Sprite GetRandomItem()
+      {
+         Sprite item;
+
+         do
+         {
+            item = items[Random.Range(0, items.Count)];
+
+         } while (usedItems.Contains(item));
+
+         usedItems.Add(item);
+         return item;
+      }
+
+      public void AssignWheelVariables(int numberOfSlots, int rotationSpeed)
+      {
+         this.numberOfSlots = numberOfSlots;
+         this.spinDuration = rotationSpeed;
+      }
 
       public void Spin()
       {
@@ -260,14 +295,14 @@ namespace Color_Clique
 
 
 
-      private void OnValidate()
-      {
-         if (PickerWheelTransform != null)
-            PickerWheelTransform.localScale = new Vector3(wheelSize, wheelSize, 1f);
+      // private void OnValidate()
+      // {
+      //    if (PickerWheelTransform != null)
+      //       PickerWheelTransform.localScale = new Vector3(wheelSize, wheelSize, 1f);
 
-         if (wheelPieces.Length > piecesMax || wheelPieces.Length < piecesMin)
-            Debug.LogError("[ PickerWheelwheel ]  pieces length must be between " + piecesMin + " and " + piecesMax);
-      }
+      //    if (wheelPieces.Length > piecesMax || wheelPieces.Length < piecesMin)
+      //       Debug.LogError("[ PickerWheelwheel ]  pieces length must be between " + piecesMin + " and " + piecesMax);
+      // }
    }
 }
 
