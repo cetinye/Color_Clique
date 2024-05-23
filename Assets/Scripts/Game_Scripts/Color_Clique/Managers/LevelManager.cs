@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using EasyUI.PickerWheelUI;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -27,7 +26,7 @@ namespace Color_Clique
             OpenCurtains();
         }
 
-        public void Spin()
+        public void SpinWheel()
         {
             wheel.Spin();
             wheel.OnSpinEnd(wheelPiece =>
@@ -36,9 +35,9 @@ namespace Color_Clique
             });
         }
 
-        public void Stop()
+        public void StopWheel()
         {
-            wheel.Stop();
+            //wheel.Stop();
             Sprite winner = wheel.GetImage();
             winnerImg.sprite = winner;
         }

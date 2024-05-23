@@ -3,9 +3,8 @@ using UnityEngine.UI;
 using DG.Tweening;
 using UnityEngine.Events;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 
-namespace EasyUI.PickerWheelUI
+namespace Color_Clique
 {
 
    public class PickerWheel : MonoBehaviour
@@ -65,6 +64,7 @@ namespace EasyUI.PickerWheelUI
       private List<int> nonZeroChancesIndices = new List<int>();
 
       private Tween tween;
+      float prevAngle, currentAngle;
 
       private void Start()
       {
@@ -154,10 +154,9 @@ namespace EasyUI.PickerWheelUI
 
             float randomAngle = Random.Range(leftOffset, rightOffset);
 
-            Vector3 targetRotation = Vector3.back * (randomAngle + 2 * 360);
+            Vector3 targetRotation = Vector3.back * 360;
 
             //float prevAngle = wheelCircle.eulerAngles.z + halfPieceAngle ;
-            float prevAngle, currentAngle;
             prevAngle = currentAngle = wheelCircle.eulerAngles.z;
 
             bool isIndicatorOnTheLine = false;
@@ -198,6 +197,7 @@ namespace EasyUI.PickerWheelUI
       {
          tween.Kill(false);
          _isSpinning = false;
+         prevAngle = currentAngle = wheelCircle.eulerAngles.z;
       }
 
       public Sprite GetImage()

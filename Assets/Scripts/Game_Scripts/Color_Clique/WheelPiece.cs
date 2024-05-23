@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace EasyUI.PickerWheelUI
+namespace Color_Clique
 {
    [System.Serializable]
    public class WheelPiece
