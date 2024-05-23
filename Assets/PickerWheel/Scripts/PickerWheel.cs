@@ -31,7 +31,6 @@ namespace EasyUI.PickerWheelUI
       [Space]
       [Header("Picker wheel settings :")]
       public float spinDuration = 8;
-      public float rotateSpeed = 8;
       [SerializeField][Range(.2f, 2f)] private float wheelSize = 1f;
 
       [Space]
@@ -113,8 +112,8 @@ namespace EasyUI.PickerWheelUI
          Transform pieceTrns = InstantiatePiece().transform.GetChild(0);
 
          pieceTrns.GetChild(0).GetComponent<Image>().sprite = piece.Icon;
-         pieceTrns.GetChild(1).GetComponent<Text>().text = piece.Label;
-         pieceTrns.GetChild(2).GetComponent<Text>().text = piece.Amount.ToString();
+         // pieceTrns.GetChild(1).GetComponent<Text>().text = piece.Label;
+         // pieceTrns.GetChild(2).GetComponent<Text>().text = piece.Amount.ToString();
          wheelPiecesList.Add(pieceTrns.GetChild(0).GetComponent<RectTransform>());
 
          //Line
