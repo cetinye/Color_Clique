@@ -15,6 +15,7 @@ namespace Color_Clique
       [Space]
       [SerializeField] private Transform PickerWheelTransform;
       [SerializeField] private Transform wheelCircle;
+      [SerializeField] private Transform transformToRotate;
       [SerializeField] private GameObject wheelPiecePrefab;
       [SerializeField] private Transform wheelPiecesParent;
 
@@ -248,7 +249,7 @@ namespace Color_Clique
 
       private void FixedUpdate()
       {
-
+         transformToRotate.RotateAround(wheelCircle.transform.position, new Vector3(0, 0, 1), 1f);
       }
 
       public void OnSpinStart(UnityAction action)
