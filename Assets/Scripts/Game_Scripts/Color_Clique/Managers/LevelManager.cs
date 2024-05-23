@@ -13,18 +13,26 @@ namespace Color_Clique
         [SerializeField] private List<LevelSO> levels = new List<LevelSO>();
 
         [Header("Scene Variables")]
-        [SerializeField] private int numberOfSlots;
-        [SerializeField] private int rotationSpeed;
+        private int numberOfSlots;
+        private int rotationSpeed;
+        private bool isTimerOn;
+        private float timer;
 
         [Header("Scene Components")]
+        [SerializeField] UIManager uiManager;
         [SerializeField] PickerWheel wheel;
-        [SerializeField] Image winnerImg;
+        [SerializeField] Image clickedImg;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
 
         void Start()
         {
             StartGame();
+        }
+
+        void Update()
+        {
+            LevelTimer();
         }
 
         private void StartGame()
@@ -34,6 +42,7 @@ namespace Color_Clique
             wheel.Initialize();
 
             OpenCurtains();
+            isTimerOn = true;
         }
 
         private void AssignLevelVariables()
@@ -42,11 +51,29 @@ namespace Color_Clique
 
             numberOfSlots = levelSO.slotCount;
             rotationSpeed = levelSO.rotationSpeed;
+            timer = levelSO.time;
         }
 
         private void AssignWheelVariables()
         {
             wheel.AssignWheelVariables(numberOfSlots, rotationSpeed);
+        }
+
+        private void LevelTimer()
+        {
+            if (!isTimerOn) return;
+
+            timer -= Time.deltaTime;
+
+            if (timer < 0)
+            {
+                isTimerOn = false;
+                timer = 0;
+            }
+
+            uiManager.SetTimeText(timer);
+
+            //TODO: Flash Warning, NoInputWarning
         }
 
         public void SpinWheel()
@@ -62,7 +89,7 @@ namespace Color_Clique
         {
             //wheel.Stop();
             Sprite winner = wheel.GetImage();
-            winnerImg.sprite = winner;
+            clickedImg.sprite = winner;
         }
 
         #region Animations
