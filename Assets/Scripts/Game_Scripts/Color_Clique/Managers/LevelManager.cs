@@ -21,6 +21,7 @@ namespace Color_Clique
         private float levelTimer;
         private int correctCount = 0;
         private int wrongCount = 0;
+        private int comboCounter = 0;
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -99,11 +100,18 @@ namespace Color_Clique
             if (selectedImg.sprite == clickedImage)
             {
                 correctCount++;
+                comboCounter++;
                 uiManager.UpdateStats(correctCount, wrongCount);
+
+                if (comboCounter >= 3)
+                {
+                    wheel.PlayCombo();
+                }
             }
             else
             {
                 wrongCount++;
+                comboCounter = 0;
                 uiManager.UpdateStats(correctCount, wrongCount);
             }
         }

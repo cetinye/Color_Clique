@@ -67,6 +67,7 @@ namespace Color_Clique
       private int numberOfSlots;
       [SerializeField] private List<Sprite> items = new List<Sprite>();
       private List<Sprite> usedItems = new List<Sprite>();
+      [SerializeField] private ParticleSystem combo;
 
       public void Initialize()
       {
@@ -236,6 +237,11 @@ namespace Color_Clique
          tween.Kill(false);
          _isSpinning = false;
          prevAngle = currentAngle = wheelCircle.eulerAngles.z;
+      }
+
+      public void PlayCombo()
+      {
+         combo.Play();
       }
 
       public Sprite GetImage()
