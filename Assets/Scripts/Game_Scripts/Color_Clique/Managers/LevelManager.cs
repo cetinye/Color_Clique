@@ -23,6 +23,7 @@ namespace Color_Clique
         private int correctCount = 0;
         private int wrongCount = 0;
         private int comboCounter = 0;
+        private float newItemInterval;
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -58,6 +59,8 @@ namespace Color_Clique
             AssignWheelVariables();
             wheel.Initialize();
 
+            InvokeRepeating(nameof(SelectItem), 0f, newItemInterval);
+
             OpenCurtains();
             isTimerOn = true;
         }
@@ -69,6 +72,7 @@ namespace Color_Clique
             numberOfSlots = levelSO.slotCount;
             rotationSpeed = levelSO.rotationSpeed;
             needleRotateSpeed = levelSO.needleRotateSpeed;
+            newItemInterval = levelSO.newItemInterval;
             levelTimer = levelSO.time;
         }
 
@@ -144,9 +148,9 @@ namespace Color_Clique
             Check(clickedImg.sprite);
         }
 
-        public void SetSelectedItem(Sprite sprite)
+        public void SelectItem()
         {
-            selectedImg.sprite = sprite;
+            selectedImg.sprite = wheel.SelectItem();
         }
 
         #region Animations

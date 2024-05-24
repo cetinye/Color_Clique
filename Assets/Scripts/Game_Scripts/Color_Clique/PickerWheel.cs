@@ -122,8 +122,6 @@ namespace Color_Clique
 
          for (int i = 0; i < numberOfSlots; i++)
             DrawPiece(i);
-
-         SelectItem();
       }
 
       private void DrawPiece(int index)
@@ -266,20 +264,9 @@ namespace Color_Clique
          onSpinEndEvent = action;
       }
 
-      private void SelectItem()
+      public Sprite SelectItem()
       {
-         LevelManager.instance.SetSelectedItem(usedItems[Random.Range(0, usedItems.Count)]);
-      }
-
-      private int GetRandomPieceIndex()
-      {
-         double r = rand.NextDouble() * accumulatedWeight;
-
-         for (int i = 0; i < wheelPieces.Length; i++)
-            if (wheelPieces[i]._weight >= r)
-               return i;
-
-         return 0;
+         return usedItems[Random.Range(0, usedItems.Count)];
       }
 
       private void CalculateWeightsAndIndices()
@@ -300,18 +287,6 @@ namespace Color_Clique
                nonZeroChancesIndices.Add(i);
          }
       }
-
-
-
-
-      // private void OnValidate()
-      // {
-      //    if (PickerWheelTransform != null)
-      //       PickerWheelTransform.localScale = new Vector3(wheelSize, wheelSize, 1f);
-
-      //    if (wheelPieces.Length > piecesMax || wheelPieces.Length < piecesMin)
-      //       Debug.LogError("[ PickerWheelwheel ]  pieces length must be between " + piecesMin + " and " + piecesMax);
-      // }
    }
 }
 
