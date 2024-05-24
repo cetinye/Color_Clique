@@ -7,6 +7,8 @@ namespace Color_Clique
 {
     public class LevelManager : MonoBehaviour
     {
+        public static LevelManager instance;
+
         [Header("Level Variables")]
         [SerializeField] private int levelId;
         [SerializeField] private LevelSO levelSO;
@@ -17,16 +19,24 @@ namespace Color_Clique
         private int rotationSpeed;
         private bool isTimerOn;
         private float levelTimer;
+        private int correctCount = 0;
+        private int wrongCount = 0;
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
         [SerializeField] PickerWheel wheel;
         [SerializeField] Image clickedImg;
+        [SerializeField] Image selectedImg;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
 
         [Header("Flash Interval")]
         [SerializeField] private bool isFlashable = true;
+
+        void Awake()
+        {
+            instance = this;
+        }
 
         void Start()
         {
@@ -84,6 +94,20 @@ namespace Color_Clique
             uiManager.SetTimeText(levelTimer);
         }
 
+        public void Check(Sprite clickedImage)
+        {
+            if (selectedImg.sprite == clickedImage)
+            {
+                correctCount++;
+                uiManager.UpdateStats(correctCount, wrongCount);
+            }
+            else
+            {
+                wrongCount++;
+                uiManager.UpdateStats(correctCount, wrongCount);
+            }
+        }
+
         public void SpinWheel()
         {
             wheel.Spin();
@@ -96,8 +120,15 @@ namespace Color_Clique
         public void StopWheel()
         {
             //wheel.Stop();
+
             Sprite winner = wheel.GetImage();
             clickedImg.sprite = winner;
+            Check(clickedImg.sprite);
+        }
+
+        public void SetSelectedItem(Sprite sprite)
+        {
+            selectedImg.sprite = sprite;
         }
 
         #region Animations

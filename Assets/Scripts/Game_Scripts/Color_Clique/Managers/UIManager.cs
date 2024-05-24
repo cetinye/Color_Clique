@@ -9,6 +9,8 @@ namespace Color_Clique
     public class UIManager : MonoBehaviour
     {
         [SerializeField] TMP_Text levelTimeText;
+        [SerializeField] TMP_Text correctText;
+        [SerializeField] TMP_Text wrongText;
 
         [Header("Flash Variables")]
         [SerializeField] private float flashInterval = 0.5f;
@@ -22,6 +24,12 @@ namespace Color_Clique
         public void SetTimeText(float time)
         {
             levelTimeText.text = time.ToString("F0");
+        }
+
+        public void UpdateStats(int correct, int wrong)
+        {
+            correctText.text = "Correct: " + correct.ToString();
+            wrongText.text = "Wrong: " + wrong.ToString();
         }
 
         public void FlashRed()

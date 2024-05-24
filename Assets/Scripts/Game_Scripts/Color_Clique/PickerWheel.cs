@@ -121,6 +121,8 @@ namespace Color_Clique
 
          for (int i = 0; i < numberOfSlots; i++)
             DrawPiece(i);
+
+         SelectItem();
       }
 
       private void DrawPiece(int index)
@@ -262,6 +264,10 @@ namespace Color_Clique
          onSpinEndEvent = action;
       }
 
+      private void SelectItem()
+      {
+         LevelManager.instance.SetSelectedItem(usedItems[Random.Range(0, usedItems.Count)]);
+      }
 
       private int GetRandomPieceIndex()
       {
