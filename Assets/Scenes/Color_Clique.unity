@@ -7060,7 +7060,7 @@ MonoBehaviour:
         m_Calls:
         - m_Target: {fileID: 1012061549}
           m_TargetAssemblyTypeName: Color_Clique.LevelManager, Assembly-CSharp
-          m_MethodName: StopWheel
+          m_MethodName: Clicked
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}

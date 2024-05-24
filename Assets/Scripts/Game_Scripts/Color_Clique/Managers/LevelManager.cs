@@ -17,13 +17,14 @@ namespace Color_Clique
         [Header("Scene Variables")]
         private int numberOfSlots;
         private int rotationSpeed;
-        private int needleRotateSpeed;
+        private float needleRotateSpeed;
         private bool isTimerOn;
         private float levelTimer;
         private int correctCount = 0;
         private int wrongCount = 0;
         private int comboCounter = 0;
         private float newItemInterval;
+        private bool isClickable;
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -63,6 +64,7 @@ namespace Color_Clique
 
             OpenCurtains();
             isTimerOn = true;
+            isClickable = true;
         }
 
         private void AssignLevelVariables()
@@ -105,6 +107,8 @@ namespace Color_Clique
 
         public void Check(Sprite clickedImage)
         {
+            isClickable = false;
+
             if (selectedImg.sprite == clickedImage)
             {
                 correctCount++;
@@ -141,18 +145,28 @@ namespace Color_Clique
             });
         }
 
-        public void StopWheel()
+        public void Clicked()
         {
-            //wheel.Stop();
+            if (!isClickable) return;
 
             Sprite winner = wheel.GetImage();
             clickedImg.sprite = winner;
             Check(clickedImg.sprite);
+
+            if (levelSO.arrowTurnOnClick)
+            {
+                wheel.AssignWheelVariables(numberOfSlots, rotationSpeed, -wheel.GetNeedleSpeed());
+            }
         }
 
         public void SelectItem()
         {
             selectedImg.sprite = wheel.SelectItem();
+        }
+
+        public void SetIsClickable(bool state)
+        {
+            isClickable = state;
         }
 
         #region Animations

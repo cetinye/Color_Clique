@@ -160,7 +160,7 @@ namespace Color_Clique
          return item;
       }
 
-      public void AssignWheelVariables(int numberOfSlots, int rotationSpeed, int needleRotateSpeed)
+      public void AssignWheelVariables(int numberOfSlots, int rotationSpeed, float needleRotateSpeed)
       {
          this.numberOfSlots = numberOfSlots;
          this.spinDuration = rotationSpeed;
@@ -271,7 +271,7 @@ namespace Color_Clique
 
       public void SetNeedleColor(Color color, float duration)
       {
-         needle.DOColor(color, duration / 2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuart);
+         needle.DOColor(color, duration / 2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuart).OnComplete(() => LevelManager.instance.SetIsClickable(true));
       }
 
       private void CalculateWeightsAndIndices()
@@ -291,6 +291,11 @@ namespace Color_Clique
             if (piece.Chance > 0)
                nonZeroChancesIndices.Add(i);
          }
+      }
+
+      public float GetNeedleSpeed()
+      {
+         return needleRotateSpeed;
       }
    }
 }

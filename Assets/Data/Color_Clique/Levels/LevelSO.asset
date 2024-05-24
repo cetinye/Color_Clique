@@ -18,3 +18,4 @@ MonoBehaviour:
   needleRotateSpeed: 2
   newItemInterval: 10
   time: 120
+  arrowTurnOnClick: 1
