@@ -8,6 +8,7 @@ namespace Color_Clique
         public int levelId;
         public int slotCount;
         public int rotationSpeed;
+        public int needleRotateSpeed;
         public int time;
     }
 }

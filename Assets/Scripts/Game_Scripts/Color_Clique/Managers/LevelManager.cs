@@ -17,6 +17,7 @@ namespace Color_Clique
         [Header("Scene Variables")]
         private int numberOfSlots;
         private int rotationSpeed;
+        private int needleRotateSpeed;
         private bool isTimerOn;
         private float levelTimer;
         private int correctCount = 0;
@@ -30,6 +31,8 @@ namespace Color_Clique
         [SerializeField] Image selectedImg;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
+        [SerializeField] private ParticleSystem combo;
+        [SerializeField] private TMPro.TMP_Text comboText;
 
         [Header("Flash Interval")]
         [SerializeField] private bool isFlashable = true;
@@ -65,12 +68,13 @@ namespace Color_Clique
 
             numberOfSlots = levelSO.slotCount;
             rotationSpeed = levelSO.rotationSpeed;
+            needleRotateSpeed = levelSO.needleRotateSpeed;
             levelTimer = levelSO.time;
         }
 
         private void AssignWheelVariables()
         {
-            wheel.AssignWheelVariables(numberOfSlots, rotationSpeed);
+            wheel.AssignWheelVariables(numberOfSlots, rotationSpeed, needleRotateSpeed);
         }
 
         private void LevelTimer()
@@ -103,9 +107,9 @@ namespace Color_Clique
                 comboCounter++;
                 uiManager.UpdateStats(correctCount, wrongCount);
 
-                if (comboCounter >= 3)
+                if (comboCounter >= 2)
                 {
-                    wheel.PlayCombo();
+                    PlayCombo();
                 }
             }
             else
@@ -114,6 +118,12 @@ namespace Color_Clique
                 comboCounter = 0;
                 uiManager.UpdateStats(correctCount, wrongCount);
             }
+        }
+
+        public void PlayCombo()
+        {
+            comboText.text = comboCounter.ToString() + "x Combo";
+            combo.Play();
         }
 
         public void SpinWheel()

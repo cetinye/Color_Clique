@@ -15,4 +15,5 @@ MonoBehaviour:
   levelId: 0
   slotCount: 10
   rotationSpeed: 5
+  needleRotateSpeed: 2
   time: 120

@@ -29,6 +29,7 @@ namespace Color_Clique
       [Space]
       [Header("Picker wheel settings :")]
       public float spinDuration = 8;
+      public float needleRotateSpeed = 1;
       [SerializeField][Range(.2f, 2f)] private float wheelSize = 1f;
 
       [Space]
@@ -67,7 +68,6 @@ namespace Color_Clique
       private int numberOfSlots;
       [SerializeField] private List<Sprite> items = new List<Sprite>();
       private List<Sprite> usedItems = new List<Sprite>();
-      [SerializeField] private ParticleSystem combo;
 
       public void Initialize()
       {
@@ -162,10 +162,11 @@ namespace Color_Clique
          return item;
       }
 
-      public void AssignWheelVariables(int numberOfSlots, int rotationSpeed)
+      public void AssignWheelVariables(int numberOfSlots, int rotationSpeed, int needleRotateSpeed)
       {
          this.numberOfSlots = numberOfSlots;
          this.spinDuration = rotationSpeed;
+         this.needleRotateSpeed = needleRotateSpeed;
       }
 
       public void Spin()
@@ -239,11 +240,6 @@ namespace Color_Clique
          prevAngle = currentAngle = wheelCircle.eulerAngles.z;
       }
 
-      public void PlayCombo()
-      {
-         combo.Play();
-      }
-
       public Sprite GetImage()
       {
          for (int i = 0; i < wheelPiecesList.Count; i++)
@@ -257,7 +253,7 @@ namespace Color_Clique
 
       private void FixedUpdate()
       {
-         transformToRotate.RotateAround(wheelCircle.transform.position, new Vector3(0, 0, 1), 1f);
+         transformToRotate.RotateAround(wheelCircle.transform.position, new Vector3(0, 0, 1), needleRotateSpeed);
       }
 
       public void OnSpinStart(UnityAction action)

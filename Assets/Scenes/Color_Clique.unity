@@ -873,11 +873,45 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 375789500}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
+  m_Father: {fileID: 406525999}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &406525998
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 406525999}
+  m_Layer: 0
+  m_Name: Particles
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &406525999
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 406525998}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 409387051}
+  - {fileID: 375789503}
+  - {fileID: 479351703}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &409387048
@@ -1491,8 +1525,8 @@ ParticleSystem:
     startRotation:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 0
-      minScalar: 0
+      scalar: -0.7853981
+      minScalar: -0.7853981
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -5834,7 +5868,7 @@ Transform:
   m_Children:
   - {fileID: 4153900322066829018}
   - {fileID: 4153900322066844830}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 406525999}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &460523804
 GameObject:
@@ -6065,7 +6099,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1248076123}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 406525999}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -7022,7 +7056,7 @@ RectTransform:
   m_GameObject: {fileID: 991314254}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.75251, y: 0.75251, z: 0.75251}
+  m_LocalScale: {x: 0.7990904, y: 0.7990904, z: 0.7990904}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1248076123}
@@ -7055,14 +7089,14 @@ MonoBehaviour:
   m_text: 2x Combo
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_sharedMaterial: {fileID: 2100000, guid: 79459efec17a4d00a321bdcc27bbc385, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294908928
-  m_fontColor: {r: 0, g: 0.11084986, b: 1, a: 1}
+    rgba: 4278255615
+  m_fontColor: {r: 1, g: 1, b: 0, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -7183,6 +7217,8 @@ MonoBehaviour:
   selectedImg: {fileID: 2139916932}
   crowdAnimator: {fileID: 604847108}
   curtainAnimator: {fileID: 1981451024}
+  combo: {fileID: 409387050}
+  comboText: {fileID: 991314256}
   isFlashable: 1
 --- !u!1 &1155532652
 GameObject:
@@ -8548,8 +8584,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 325.20004}
-  m_SizeDelta: {x: 138, y: 229}
+  m_AnchoredPosition: {x: 0, y: 317.06}
+  m_SizeDelta: {x: 138, y: 254.83}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2053437661
 MonoBehaviour:
@@ -9203,7 +9239,6 @@ MonoBehaviour:
   - {fileID: 21300034, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
   - {fileID: 21300036, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
   - {fileID: 21300038, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  combo: {fileID: 0}
 --- !u!114 &3565621161520867275
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19557,6 +19592,4 @@ SceneRoots:
   - {fileID: 653098709}
   - {fileID: 291493556}
   - {fileID: 1155532655}
-  - {fileID: 409387051}
-  - {fileID: 375789503}
-  - {fileID: 479351703}
+  - {fileID: 406525999}
