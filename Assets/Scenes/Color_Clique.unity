@@ -6287,13 +6287,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 551061989}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.4339623, g: 0.4339623, b: 0.4339623, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -7421,7 +7421,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 2d893dd7e89ba9f4fb46ad974029877e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: dc6652ec7cced31448d869b987946c39, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -7774,7 +7774,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: e30158eebefd60646a53cccb36082762, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 51502c0bdb8baa947bbe9fa212114d2f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8168,7 +8168,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 345}
-  m_SizeDelta: {x: 953, y: 262}
+  m_SizeDelta: {x: 954, y: 263}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1931746148
 MonoBehaviour:
@@ -8190,7 +8190,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 68fcbaee283d8194594b61511d15903c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a19ebbbd1b0363b47a72e9ef4c309311, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8265,7 +8265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 9a7bd5f6e5e3a4543a286b7b7fbaf29b, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 2e8f1795412be914ca44e7e9405c730d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -8395,7 +8395,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2045647062
 RectTransform:
   m_ObjectHideFlags: 0
@@ -8607,7 +8607,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8a5bb2194441655408beed9948d69ca8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84213440ce8dc40418534be273c4b7ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -9214,6 +9214,7 @@ MonoBehaviour:
   volume: 0.5
   pitch: 1
   spinDuration: 10
+  needleRotateSpeed: 1
   wheelSize: 1
   wheelPieces: []
   needle: {fileID: 2053437661}
