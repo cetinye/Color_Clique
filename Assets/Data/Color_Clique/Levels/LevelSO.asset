@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: LevelSO
   m_EditorClassIdentifier: 
   levelId: 0
-  slotCount: 12
+  slotCount: 10
   rotationSpeed: 5
-  needleRotateSpeed: 4
-  newItemInterval: 3
+  needleRotateSpeed: 2
+  newItemInterval: 10
   time: 120
