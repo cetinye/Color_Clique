@@ -269,6 +269,11 @@ namespace Color_Clique
          return usedItems[Random.Range(0, usedItems.Count)];
       }
 
+      public void SetNeedleColor(Color color, float duration)
+      {
+         needle.DOColor(color, duration / 2f).SetLoops(2, LoopType.Yoyo).SetEase(Ease.InOutQuart);
+      }
+
       private void CalculateWeightsAndIndices()
       {
          for (int i = 0; i < wheelPieces.Length; i++)

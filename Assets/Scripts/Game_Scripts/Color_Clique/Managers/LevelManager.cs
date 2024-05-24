@@ -110,6 +110,7 @@ namespace Color_Clique
                 correctCount++;
                 comboCounter++;
                 uiManager.UpdateStats(correctCount, wrongCount);
+                wheel.SetNeedleColor(Color.green, 0.5f);
 
                 if (comboCounter >= 2)
                 {
@@ -121,6 +122,7 @@ namespace Color_Clique
                 wrongCount++;
                 comboCounter = 0;
                 uiManager.UpdateStats(correctCount, wrongCount);
+                wheel.SetNeedleColor(Color.red, 0.5f);
             }
         }
 
