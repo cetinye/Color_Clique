@@ -34,6 +34,7 @@ namespace Color_Clique
         private bool isClickable;
         private int moveLimitForChange;
         private int moveCounter;
+        private List<int> scores = new List<int>();
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -196,6 +197,25 @@ namespace Color_Clique
             {
                 wheel.AssignWheelVariables(wheelSegments, -wheel.GetNeedleSpeed());
             }
+        }
+
+        private void CalculateLevelScore()
+        {
+            int levelScore = Mathf.CeilToInt(Mathf.Max((correctCount - wrongCount) * scorePerCorrectOperation, maxScore)) + (comboCounter * comboScore);
+            levelScore = Mathf.Max(levelScore, 0);
+            scores.Add(levelScore);
+        }
+
+        private int GetTotalScore()
+        {
+            float total = 0;
+
+            for (int i = 0; i < scores.Count; i++)
+            {
+                total += scores[i];
+            }
+
+            return Mathf.Max(Mathf.CeilToInt(total / scores.Count), 0);
         }
 
         public void SelectItem()
