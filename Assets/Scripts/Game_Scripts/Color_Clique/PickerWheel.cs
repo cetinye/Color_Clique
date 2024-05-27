@@ -103,11 +103,6 @@ namespace Color_Clique
          rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, pieceWidth);
          rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, pieceHeight);
 
-         // for (int i = 0; i < numberOfSlots; i++)
-         //    DrawPiece(i);
-
-         // Destroy(wheelPiecePrefab);
-
          SpawnSlots();
       }
 
@@ -122,6 +117,8 @@ namespace Color_Clique
 
          for (int i = 0; i < numberOfSlots; i++)
             DrawPiece(i);
+
+         Destroy(wheelPiecePrefab);
       }
 
       private void DrawPiece(int index)
@@ -160,10 +157,9 @@ namespace Color_Clique
          return item;
       }
 
-      public void AssignWheelVariables(int numberOfSlots, int rotationSpeed, float needleRotateSpeed)
+      public void AssignWheelVariables(int numberOfSlots, float needleRotateSpeed)
       {
          this.numberOfSlots = numberOfSlots;
-         this.spinDuration = rotationSpeed;
          this.needleRotateSpeed = needleRotateSpeed;
       }
 

@@ -2,15 +2,20 @@ using UnityEngine;
 
 namespace Color_Clique
 {
-    [CreateAssetMenu(fileName = "LevelSO", menuName = "ScriptableObjects/LevelSO", order = 1)]
     public class LevelSO : ScriptableObject
     {
         public int levelId;
-        public int slotCount;
-        public int rotationSpeed;
-        public float needleRotateSpeed;
-        public int newItemInterval;
-        public int time;
-        public bool arrowTurnOnClick;
+        public int numberOfColors;
+        public int shapeCount;
+        public int wheelSegments;
+        public float spinSpeedMultiplier;
+        public bool isWheelBarReversalEnabled;
+        public int minChangeFrequency;
+        public int maxChangeFrequency;
+        public int totalTime;
+        public int comboScore;
+        public int maxScore;
+        public float scorePerCorrectOperation;
+        public int maxScoreForCorrectOperation;
     }
 }

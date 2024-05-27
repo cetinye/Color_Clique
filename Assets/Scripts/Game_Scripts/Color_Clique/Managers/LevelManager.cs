@@ -15,16 +15,25 @@ namespace Color_Clique
         [SerializeField] private List<LevelSO> levels = new List<LevelSO>();
 
         [Header("Scene Variables")]
-        private int numberOfSlots;
-        private int rotationSpeed;
-        private float needleRotateSpeed;
+        private int numberOfColors;
+        private int shapeCount;
+        private int wheelSegments;
+        private float rotationSpeed;
+        private bool isWheelBarReversalEnabled;
+        private int minChangeFrequency;
+        private int maxChangeFrequency;
+        private int comboScore;
+        private int maxScore;
+        private float scorePerCorrectOperation;
+        private int maxScoreForCorrectOperation;
         private bool isTimerOn;
         private float levelTimer;
         private int correctCount = 0;
         private int wrongCount = 0;
         private int comboCounter = 0;
-        private float newItemInterval;
         private bool isClickable;
+        private int moveLimitForChange;
+        private int moveCounter;
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -34,6 +43,7 @@ namespace Color_Clique
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
         [SerializeField] private ParticleSystem combo;
+        [SerializeField] private Camera particleCam;
         [SerializeField] private TMPro.TMP_Text comboText;
 
         [Header("Flash Interval")]
@@ -58,9 +68,9 @@ namespace Color_Clique
         {
             AssignLevelVariables();
             AssignWheelVariables();
+            SetMoveLimit();
             wheel.Initialize();
-
-            InvokeRepeating(nameof(SelectItem), 0f, newItemInterval);
+            SelectItem();
 
             OpenCurtains();
             isTimerOn = true;
@@ -71,16 +81,23 @@ namespace Color_Clique
         {
             levelSO = levels[levelId];
 
-            numberOfSlots = levelSO.slotCount;
-            rotationSpeed = levelSO.rotationSpeed;
-            needleRotateSpeed = levelSO.needleRotateSpeed;
-            newItemInterval = levelSO.newItemInterval;
-            levelTimer = levelSO.time;
+            numberOfColors = levelSO.numberOfColors;
+            shapeCount = levelSO.shapeCount;
+            wheelSegments = levelSO.wheelSegments;
+            rotationSpeed = 2 * levelSO.spinSpeedMultiplier;
+            isWheelBarReversalEnabled = levelSO.isWheelBarReversalEnabled;
+            minChangeFrequency = levelSO.minChangeFrequency;
+            maxChangeFrequency = levelSO.maxChangeFrequency;
+            levelTimer = levelSO.totalTime;
+            comboScore = levelSO.comboScore;
+            maxScore = levelSO.maxScore;
+            scorePerCorrectOperation = levelSO.scorePerCorrectOperation;
+            maxScoreForCorrectOperation = levelSO.maxScoreForCorrectOperation;
         }
 
         private void AssignWheelVariables()
         {
-            wheel.AssignWheelVariables(numberOfSlots, rotationSpeed, needleRotateSpeed);
+            wheel.AssignWheelVariables(wheelSegments, rotationSpeed);
         }
 
         private void LevelTimer()
@@ -103,6 +120,12 @@ namespace Color_Clique
             }
 
             uiManager.SetTimeText(levelTimer);
+        }
+
+        private void SetMoveLimit()
+        {
+            moveLimitForChange = Random.Range(minChangeFrequency, maxChangeFrequency);
+            moveCounter = 0;
         }
 
         public void Check(Sprite clickedImage)
@@ -128,12 +151,28 @@ namespace Color_Clique
                 uiManager.UpdateStats(correctCount, wrongCount);
                 wheel.SetNeedleColor(Color.red, 0.5f);
             }
+
+            //select new item if move limit reached
+            moveCounter++;
+            if (moveCounter >= moveLimitForChange)
+            {
+                SelectItem();
+                SetMoveLimit();
+            }
         }
 
         public void PlayCombo()
         {
             comboText.text = comboCounter.ToString() + "x Combo";
+            particleCam.gameObject.SetActive(true);
             combo.Play();
+            CancelInvoke(nameof(DisableParticleCam));
+            Invoke(nameof(DisableParticleCam), 0.5f);
+        }
+
+        private void DisableParticleCam()
+        {
+            particleCam.gameObject.SetActive(false);
         }
 
         public void SpinWheel()
@@ -153,9 +192,9 @@ namespace Color_Clique
             clickedImg.sprite = winner;
             Check(clickedImg.sprite);
 
-            if (levelSO.arrowTurnOnClick)
+            if (levelSO.isWheelBarReversalEnabled)
             {
-                wheel.AssignWheelVariables(numberOfSlots, rotationSpeed, -wheel.GetNeedleSpeed());
+                wheel.AssignWheelVariables(wheelSegments, -wheel.GetNeedleSpeed());
             }
         }
 

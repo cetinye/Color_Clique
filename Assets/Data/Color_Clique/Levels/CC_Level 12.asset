@@ -10,12 +10,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4a2f5f360eaecec46a63fdb48095de6e, type: 3}
-  m_Name: LevelSO
+  m_Name: CC_Level 12
   m_EditorClassIdentifier: 
-  levelId: 0
-  slotCount: 10
-  rotationSpeed: 5
-  needleRotateSpeed: 2
-  newItemInterval: 10
-  time: 120
-  arrowTurnOnClick: 1
+  levelId: 12
+  numberOfColors: 8
+  shapeCount: 4
+  wheelSegments: 8
+  spinSpeedMultiplier: 1.8
+  isWheelBarReversalEnabled: 1
+  minChangeFrequency: 5
+  maxChangeFrequency: 10
+  totalTime: 120
+  comboScore: 1
+  maxScore: 137
+  scorePerCorrectOperation: 4.2
+  maxScoreForCorrectOperation: 2
