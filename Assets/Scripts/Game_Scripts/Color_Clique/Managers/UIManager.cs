@@ -59,8 +59,8 @@ namespace Color_Clique
         public void SetDebugTexts(int levelId, int levelDownCounter, int levelUpCounter)
         {
             levelIdText.text = "LevelID: " + levelId.ToString();
-            levelDownText.text = "LevelUp#: " + levelDownCounter.ToString();
-            levelUpText.text = "LevelDown#: " + levelUpCounter.ToString();
+            levelDownText.text = "LevelDown#: " + levelDownCounter.ToString();
+            levelUpText.text = "LevelUp#: " + levelUpCounter.ToString();
         }
     }
 }

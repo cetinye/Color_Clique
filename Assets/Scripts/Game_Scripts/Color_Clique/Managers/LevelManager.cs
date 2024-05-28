@@ -40,7 +40,7 @@ namespace Color_Clique
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
-        [SerializeField] PickerWheel wheel;
+        [SerializeField] Wheel wheel;
         [SerializeField] Image clickedImg;
         [SerializeField] Image selectedImg;
         [SerializeField] private Animator crowdAnimator;
@@ -186,20 +186,11 @@ namespace Color_Clique
             particleCam.gameObject.SetActive(false);
         }
 
-        public void SpinWheel()
-        {
-            wheel.Spin();
-            wheel.OnSpinEnd(wheelPiece =>
-            {
-                Debug.Log(wheelPiece.Label);
-            });
-        }
-
         public void Clicked()
         {
             if (!isClickable) return;
 
-            Sprite winner = wheel.GetImage();
+            Sprite winner = wheel.GetSprite();
             clickedImg.sprite = winner;
             Check(clickedImg.sprite);
 
@@ -235,7 +226,7 @@ namespace Color_Clique
             {
                 levelUpCounter = 0;
                 SetLevel(++levelId);
-
+                CrowdClap();
                 CalculateLevelScore();
                 uiManager.SetScoreText(GetTotalScore());
             }
@@ -244,6 +235,7 @@ namespace Color_Clique
             {
                 levelDownCounter = 0;
                 SetLevel(--levelId);
+                CrowdShout();
             }
 
             uiManager.SetDebugTexts(levelId, levelDownCounter, levelUpCounter);
@@ -268,21 +260,26 @@ namespace Color_Clique
             isClickable = state;
         }
 
+        public Wheel GetWheel()
+        {
+            return wheel;
+        }
+
         #region Animations
 
         public void OpenCurtains()
         {
-            curtainAnimator.Play("CurtainOpen");
+            curtainAnimator.Play("CurtainOpen", -1, 0.0f);
         }
 
         public void CrowdClap()
         {
-            crowdAnimator.Play("Clap");
+            crowdAnimator.Play("Clap", -1, 0.0f);
         }
 
         public void CrowdShout()
         {
-            crowdAnimator.Play("Shout");
+            crowdAnimator.Play("Shout", -1, 0.0f);
         }
 
         #endregion
