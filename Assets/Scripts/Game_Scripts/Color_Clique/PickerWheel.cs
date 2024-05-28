@@ -17,6 +17,7 @@ namespace Color_Clique
       [SerializeField] private Transform wheelCircle;
       [SerializeField] private Transform transformToRotate;
       [SerializeField] private GameObject wheelPiecePrefab;
+      [SerializeField] private GameObject wheelPiecePref;
       [SerializeField] private Transform wheelPiecesParent;
 
       [Space]
@@ -68,6 +69,7 @@ namespace Color_Clique
       private int numberOfSlots;
       [SerializeField] private List<Sprite> items = new List<Sprite>();
       private List<Sprite> usedItems = new List<Sprite>();
+      private List<GameObject> itemsToDelete = new List<GameObject>();
 
       public void Initialize()
       {
@@ -95,9 +97,9 @@ namespace Color_Clique
 
       private void Generate()
       {
-         wheelPiecePrefab = InstantiatePiece();
+         wheelPiecePref = InstantiatePiece();
 
-         RectTransform rt = wheelPiecePrefab.transform.GetChild(0).GetComponent<RectTransform>();
+         RectTransform rt = wheelPiecePref.transform.GetChild(0).GetComponent<RectTransform>();
          float pieceWidth = Mathf.Lerp(pieceMinSize.x, pieceMaxSize.x, 1f - Mathf.InverseLerp(piecesMin, piecesMax, numberOfSlots));
          float pieceHeight = Mathf.Lerp(pieceMinSize.y, pieceMaxSize.y, 1f - Mathf.InverseLerp(piecesMin, piecesMax, numberOfSlots));
          rt.SetSizeWithCurrentAnchors(RectTransform.Axis.Horizontal, pieceWidth);
@@ -108,6 +110,8 @@ namespace Color_Clique
 
       private void SpawnSlots()
       {
+         DeleteItems();
+
          wheelPieces = new WheelPiece[numberOfSlots];
 
          for (int i = 0; i < numberOfSlots; i++)
@@ -118,7 +122,7 @@ namespace Color_Clique
          for (int i = 0; i < numberOfSlots; i++)
             DrawPiece(i);
 
-         Destroy(wheelPiecePrefab);
+         Destroy(wheelPiecePref.gameObject);
       }
 
       private void DrawPiece(int index)
@@ -136,6 +140,20 @@ namespace Color_Clique
          lineTrns.RotateAround(wheelPiecesParent.position, Vector3.back, (pieceAngle * index) + halfPieceAngle);
 
          pieceTrns.RotateAround(wheelPiecesParent.position, Vector3.back, pieceAngle * index);
+
+         itemsToDelete.Add(pieceTrns.parent.gameObject);
+         itemsToDelete.Add(lineTrns.gameObject);
+      }
+
+      private void DeleteItems()
+      {
+         wheelPiecesList.Clear();
+         usedItems.Clear();
+
+         foreach (var item in itemsToDelete)
+         {
+            Destroy(item);
+         }
       }
 
       private GameObject InstantiatePiece()

@@ -34,6 +34,8 @@ namespace Color_Clique
         private bool isClickable;
         private int moveLimitForChange;
         private int moveCounter;
+        private int levelUpCounter;
+        private int levelDownCounter;
         private List<int> scores = new List<int>();
 
         [Header("Scene Components")]
@@ -81,6 +83,9 @@ namespace Color_Clique
         private void AssignLevelVariables()
         {
             levelSO = levels[levelId];
+
+            levelUpCounter = 0;
+            levelDownCounter = 0;
 
             numberOfColors = levelSO.numberOfColors;
             shapeCount = levelSO.shapeCount;
@@ -137,6 +142,7 @@ namespace Color_Clique
             {
                 correctCount++;
                 comboCounter++;
+                levelUpCounter++;
                 uiManager.UpdateStats(correctCount, wrongCount);
                 wheel.SetNeedleColor(Color.green, 0.5f);
 
@@ -149,6 +155,7 @@ namespace Color_Clique
             {
                 wrongCount++;
                 comboCounter = 0;
+                levelDownCounter++;
                 uiManager.UpdateStats(correctCount, wrongCount);
                 wheel.SetNeedleColor(Color.red, 0.5f);
             }
@@ -160,6 +167,8 @@ namespace Color_Clique
                 SelectItem();
                 SetMoveLimit();
             }
+
+            CheckLevel();
         }
 
         public void PlayCombo()
@@ -216,6 +225,35 @@ namespace Color_Clique
             }
 
             return Mathf.Max(Mathf.CeilToInt(total / scores.Count), 0);
+        }
+
+        private void CheckLevel()
+        {
+            if (levelUpCounter == 3)
+            {
+                levelUpCounter = 0;
+                SetLevel(++levelId);
+
+                CalculateLevelScore();
+                uiManager.SetScoreText(GetTotalScore());
+            }
+
+            if (levelDownCounter == 2)
+            {
+                levelDownCounter = 0;
+                SetLevel(--levelId);
+            }
+
+            uiManager.SetDebugTexts(levelId, levelDownCounter, levelUpCounter);
+        }
+
+        private void SetLevel(int levelId)
+        {
+            this.levelId = Mathf.Clamp(levelId, 0, levels.Count - 1);
+            AssignLevelVariables();
+            AssignWheelVariables();
+            wheel.Initialize();
+            SelectItem();
         }
 
         public void SelectItem()

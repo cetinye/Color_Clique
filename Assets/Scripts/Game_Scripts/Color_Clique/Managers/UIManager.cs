@@ -11,10 +11,16 @@ namespace Color_Clique
         [SerializeField] TMP_Text levelTimeText;
         [SerializeField] TMP_Text correctText;
         [SerializeField] TMP_Text wrongText;
+        [SerializeField] TMP_Text scoreText;
 
         [Header("Flash Variables")]
         [SerializeField] private float flashInterval = 0.5f;
         private Color defaultColor;
+
+        [Space()]
+        [SerializeField] private TMP_Text levelIdText;
+        [SerializeField] private TMP_Text levelDownText;
+        [SerializeField] private TMP_Text levelUpText;
 
         void Awake()
         {
@@ -32,6 +38,11 @@ namespace Color_Clique
             wrongText.text = "Wrong: " + wrong.ToString();
         }
 
+        public void SetScoreText(int score)
+        {
+            scoreText.text = "Score: " + score.ToString();
+        }
+
         public void FlashRed()
         {
             Sequence redFlash = DOTween.Sequence();
@@ -43,6 +54,13 @@ namespace Color_Clique
                     .SetLoops(6);
 
             redFlash.Play();
+        }
+
+        public void SetDebugTexts(int levelId, int levelDownCounter, int levelUpCounter)
+        {
+            levelIdText.text = "LevelID: " + levelId.ToString();
+            levelDownText.text = "LevelUp#: " + levelDownCounter.ToString();
+            levelUpText.text = "LevelDown#: " + levelUpCounter.ToString();
         }
     }
 }
