@@ -41,8 +41,8 @@ namespace Color_Clique
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
         [SerializeField] Wheel wheel;
-        [SerializeField] Image selectedImg;
-        [SerializeField] Image selectedImgBG;
+        [SerializeField] SpriteRenderer selectedSp;
+        [SerializeField] SpriteRenderer selectedSpBG;
         [SerializeField] Color selectedColor;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
@@ -140,7 +140,7 @@ namespace Color_Clique
         {
             isClickable = false;
 
-            if (selectedImg.sprite == clickedImage && selectedColor == clickedColor)
+            if (selectedSp.sprite == clickedImage && selectedColor == clickedColor)
             {
                 correctCount++;
                 comboCounter++;
@@ -254,9 +254,9 @@ namespace Color_Clique
         {
             Slot selectedSlot = wheel.SelectSlot();
 
-            selectedImg.sprite = selectedSlot.GetItemSprite();
+            selectedSp.sprite = selectedSlot.GetItemSprite();
             selectedColor = selectedSlot.GetSlotColor();
-            selectedImgBG.color = selectedColor;
+            selectedSpBG.color = selectedColor;
         }
 
         public void SetIsClickable(bool state)
