@@ -11,8 +11,16 @@ namespace Color_Clique
         {
             foreach (Slot slot in slots)
             {
-                slot.SetSprite(LevelManager.instance.GetWheel().GetRandomItem());
+                slot.SetItemSprite(LevelManager.instance.GetWheel().GetRandomItem());
+                slot.SetSlotColor(LevelManager.instance.GetWheel().GetRandomColor());
+
+                LevelManager.instance.GetWheel().ResetColors();
             }
+        }
+
+        public Slot GetRandomSlot()
+        {
+            return slots[Random.Range(0, slots.Count)];
         }
     }
 }

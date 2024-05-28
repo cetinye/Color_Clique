@@ -22,7 +22,9 @@ namespace Color_Clique
 
         [Header("Lists")]
         [SerializeField] private List<Sprite> items = new List<Sprite>();
+        [SerializeField] private List<Color> colors = new List<Color>();
         [SerializeField] private List<Sprite> usedItems = new List<Sprite>();
+        [SerializeField] private List<Color> usedColors = new List<Color>();
 
         public void AssignWheelVariables(int numberOfSlots, float needleRotateSpeed)
         {
@@ -59,9 +61,9 @@ namespace Color_Clique
             spawnedWheel.transform.SetSiblingIndex(0);
         }
 
-        public Sprite SelectItem()
+        public Slot SelectSlot()
         {
-            return usedItems[Random.Range(0, usedItems.Count)];
+            return spawnedWheel.GetRandomSlot();
         }
 
         public void SetNeedleColor(Color color, float duration)
@@ -69,14 +71,14 @@ namespace Color_Clique
             needle.SetNeedleColor(color, duration);
         }
 
-        public float GetNeedleSpeed()
+        public void ReverseNeedle()
         {
-            return needle.GetNeedleSpeed();
+            needle.ReverseNeedle();
         }
 
-        public Sprite GetSprite()
+        public Slot GetClickedSlot()
         {
-            return needle.GetOverlappingSlot().GetSprite();
+            return needle.GetOverlappingSlot();
         }
 
         public Sprite GetRandomItem()
@@ -93,9 +95,29 @@ namespace Color_Clique
             return item;
         }
 
+        public Color GetRandomColor()
+        {
+            Color randColor;
+
+            do
+            {
+                randColor = colors[Random.Range(0, items.Count)];
+
+            } while (usedColors.Contains(randColor));
+
+            usedColors.Add(randColor);
+            return randColor;
+        }
+
         private void Reset()
         {
             usedItems.Clear();
+            usedColors.Clear();
+        }
+
+        public void ResetColors()
+        {
+            usedColors.Clear();
         }
     }
 }

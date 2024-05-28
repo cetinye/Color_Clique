@@ -41,8 +41,9 @@ namespace Color_Clique
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
         [SerializeField] Wheel wheel;
-        [SerializeField] Image clickedImg;
         [SerializeField] Image selectedImg;
+        [SerializeField] Image selectedImgBG;
+        [SerializeField] Color selectedColor;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
         [SerializeField] private ParticleSystem combo;
@@ -135,11 +136,11 @@ namespace Color_Clique
             moveCounter = 0;
         }
 
-        public void Check(Sprite clickedImage)
+        public void Check(Sprite clickedImage, Color clickedColor)
         {
             isClickable = false;
 
-            if (selectedImg.sprite == clickedImage)
+            if (selectedImg.sprite == clickedImage && selectedColor == clickedColor)
             {
                 correctCount++;
                 comboCounter++;
@@ -190,13 +191,12 @@ namespace Color_Clique
         {
             if (!isClickable) return;
 
-            Sprite winner = wheel.GetSprite();
-            clickedImg.sprite = winner;
-            Check(clickedImg.sprite);
+            Slot clickedSlot = wheel.GetClickedSlot();
+            Check(clickedSlot.GetItemSprite(), clickedSlot.GetSlotColor());
 
             if (levelSO.isWheelBarReversalEnabled)
             {
-                wheel.AssignWheelVariables(wheelSegments, -wheel.GetNeedleSpeed());
+                wheel.ReverseNeedle();
             }
         }
 
@@ -252,7 +252,11 @@ namespace Color_Clique
 
         public void SelectItem()
         {
-            selectedImg.sprite = wheel.SelectItem();
+            Slot selectedSlot = wheel.SelectSlot();
+
+            selectedImg.sprite = selectedSlot.GetItemSprite();
+            selectedColor = selectedSlot.GetSlotColor();
+            selectedImgBG.color = selectedColor;
         }
 
         public void SetIsClickable(bool state)

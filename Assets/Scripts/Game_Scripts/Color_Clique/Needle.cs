@@ -32,9 +32,9 @@ namespace Color_Clique
             needleRotateSpeed = baseSpeed * speed;
         }
 
-        public float GetNeedleSpeed()
+        public void ReverseNeedle()
         {
-            return needleRotateSpeed;
+            needleRotateSpeed = -needleRotateSpeed;
         }
 
         public Slot GetOverlappingSlot()
