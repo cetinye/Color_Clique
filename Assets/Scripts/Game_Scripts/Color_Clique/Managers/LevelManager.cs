@@ -69,6 +69,10 @@ namespace Color_Clique
 
         private void StartGame()
         {
+            // start from one level down
+            levelId--;
+            levelId = Mathf.Clamp(levelId, 0, levels.Count - 1);
+
             AssignLevelVariables();
             AssignWheelVariables();
             SetMoveLimit();
