@@ -189,7 +189,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -372, y: -333}
-  m_SizeDelta: {x: 238.5, y: 156}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &93169936
 MonoBehaviour:
@@ -9758,7 +9758,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 356, y: -333}
-  m_SizeDelta: {x: 238.5, y: 156}
+  m_SizeDelta: {x: 256, y: 256}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2139916932
 MonoBehaviour:
@@ -10185,26 +10185,18 @@ MonoBehaviour:
   needle: {fileID: 2053437661}
   wheelPiecesList: []
   items:
-  - {fileID: 21300000, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300002, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300004, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300006, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300008, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300010, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300012, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300014, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300016, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300018, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300020, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300022, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300024, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300026, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300028, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300030, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300032, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300034, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300036, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
-  - {fileID: 21300038, guid: 6e980baa502e72148bbc79fb42c81d10, type: 3}
+  - {fileID: 21300000, guid: d917611c8f7a2f740b6718eb29d6ac07, type: 3}
+  - {fileID: 21300000, guid: e0a1bc33abf3172418a3d0755b1a3ca4, type: 3}
+  - {fileID: 21300000, guid: 66f1d7b6a585c5b48bac26b8a947e1c3, type: 3}
+  - {fileID: 21300000, guid: 310e3b03b47fbdf4da60ed76ac956618, type: 3}
+  - {fileID: 21300000, guid: dd040c3c7fd4fa14aaa0827bf472e6d9, type: 3}
+  - {fileID: 21300000, guid: db85be0b6196b844c912ccad81cb2c57, type: 3}
+  - {fileID: 21300000, guid: 09cba8d210493e644a4eff6348078209, type: 3}
+  - {fileID: 21300000, guid: 47e745d66c690c943bc49d80d5349a3e, type: 3}
+  - {fileID: 21300000, guid: 09704f9ee142eea43a884fd7b2df37a2, type: 3}
+  - {fileID: 21300000, guid: f775fe24eeb3cb440b0ef28259ccdcae, type: 3}
+  - {fileID: 21300000, guid: 4478f54e23422d440885d4b5e395683a, type: 3}
+  - {fileID: 21300000, guid: c001993ff04fe434aa5169f2713c8648, type: 3}
 --- !u!114 &3565621161520867275
 MonoBehaviour:
   m_ObjectHideFlags: 0

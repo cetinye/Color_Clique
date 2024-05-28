@@ -88,9 +88,6 @@ namespace Color_Clique
         {
             levelSO = levels[levelId];
 
-            levelUpCounter = 0;
-            levelDownCounter = 0;
-
             numberOfColors = levelSO.numberOfColors;
             shapeCount = levelSO.shapeCount;
             wheelSegments = levelSO.wheelSegments;
