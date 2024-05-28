@@ -22,10 +22,10 @@ namespace Color_Clique
         private bool isWheelBarReversalEnabled;
         private int minChangeFrequency;
         private int maxChangeFrequency;
-        private int comboScore;
+        private bool isComboScoreEnabled;
         private int maxScore;
         private float scorePerCorrectOperation;
-        private int maxScoreForCorrectOperation;
+        private int comboMultiplier;
         private bool isTimerOn;
         private float levelTimer;
         private int correctCount = 0;
@@ -99,10 +99,10 @@ namespace Color_Clique
             minChangeFrequency = levelSO.minChangeFrequency;
             maxChangeFrequency = levelSO.maxChangeFrequency;
             levelTimer = levelSO.totalTime;
-            comboScore = levelSO.comboScore;
+            isComboScoreEnabled = levelSO.isComboScoreEnabled;
             maxScore = levelSO.maxScore;
             scorePerCorrectOperation = levelSO.scorePerCorrectOperation;
-            maxScoreForCorrectOperation = levelSO.maxScoreForCorrectOperation;
+            comboMultiplier = levelSO.comboMultiplier;
         }
 
         private void AssignWheelVariables()
@@ -214,8 +214,9 @@ namespace Color_Clique
 
         private void CalculateLevelScore()
         {
-            int levelScore = Mathf.CeilToInt(Mathf.Max((correctCount - wrongCount) * scorePerCorrectOperation, maxScore)) + (comboCounter * comboScore);
+            int levelScore = Mathf.CeilToInt(Mathf.Min((correctCount - wrongCount) * scorePerCorrectOperation, maxScore)) + (comboCounter * comboMultiplier);
             levelScore = Mathf.Max(levelScore, 0);
+            levelScore = Mathf.Clamp(levelScore, 0, 1000);
             scores.Add(levelScore);
         }
 

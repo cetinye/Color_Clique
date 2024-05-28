@@ -21,7 +21,7 @@ MonoBehaviour:
   minChangeFrequency: 5
   maxChangeFrequency: 10
   totalTime: 120
-  comboScore: 1
+  isComboScoreEnabled: 1
   maxScore: 83
   scorePerCorrectOperation: 2.7
-  maxScoreForCorrectOperation: 1
+  comboMultiplier: 1

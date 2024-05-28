@@ -13,9 +13,9 @@ namespace Color_Clique
         public int minChangeFrequency;
         public int maxChangeFrequency;
         public int totalTime;
-        public int comboScore;
+        public bool isComboScoreEnabled;
         public int maxScore;
         public float scorePerCorrectOperation;
-        public int maxScoreForCorrectOperation;
+        public int comboMultiplier;
     }
 }

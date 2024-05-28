@@ -36,10 +36,10 @@ namespace Color_Clique
                 level.minChangeFrequency = int.Parse(splitData[6]);
                 level.maxChangeFrequency = int.Parse(splitData[7]);
                 level.totalTime = int.Parse(splitData[8]);
-                level.comboScore = int.Parse(splitData[9]);
+                level.isComboScoreEnabled = Convert.ToBoolean(int.Parse(splitData[9]));
                 level.maxScore = int.Parse(splitData[10]);
                 level.scorePerCorrectOperation = float.Parse(splitData[11]);
-                level.maxScoreForCorrectOperation = int.Parse(splitData[12]);
+                level.comboMultiplier = int.Parse(splitData[12]);
 
                 AssetDatabase.CreateAsset(level, $"Assets/Data/Color_Clique/Levels/{"CC_Level " + startingNamingIndex}.asset");
                 startingNamingIndex++;
