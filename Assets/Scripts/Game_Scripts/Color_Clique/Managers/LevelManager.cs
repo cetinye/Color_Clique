@@ -197,7 +197,7 @@ namespace Color_Clique
             {
                 PlayCombo();
             }
-            if (levelUpCounter >= 10)
+            if (comboCounter >= 10)
             {
                 PlayConfettis();
             }
