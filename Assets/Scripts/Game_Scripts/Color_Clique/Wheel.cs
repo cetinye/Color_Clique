@@ -10,6 +10,8 @@ namespace Color_Clique
         public Transform center;
         [SerializeField] private Needle needle;
         private WheelPart spawnedWheel;
+        private int numberOfColors;
+        private int shapeCount;
 
         [Header("Wheel Prefabs")]
         [SerializeField] private WheelPart wheel4;
@@ -26,6 +28,12 @@ namespace Color_Clique
         [SerializeField] private List<Sprite> usedItems = new List<Sprite>();
         [SerializeField] private List<Color> usedColors = new List<Color>();
 
+        void Awake()
+        {
+            items.Shuffle();
+            colors.Shuffle();
+        }
+
         public void AssignWheelVariables(int numberOfSlots, float needleRotateSpeed)
         {
             this.numberOfSlots = numberOfSlots;
@@ -34,6 +42,9 @@ namespace Color_Clique
 
         public void Initialize()
         {
+            numberOfColors = LevelManager.instance.GetNumberOfColors();
+            shapeCount = LevelManager.instance.GetShapeCount();
+
             SpawnWheel(numberOfSlots);
         }
 
@@ -57,7 +68,7 @@ namespace Color_Clique
                 _ => Instantiate(wheel12, transform),
             };
 
-            spawnedWheel.Initialize();
+            spawnedWheel.Initialize(numberOfColors, shapeCount);
             spawnedWheel.transform.SetSiblingIndex(0);
         }
 
@@ -118,6 +129,25 @@ namespace Color_Clique
         public void ResetColors()
         {
             usedColors.Clear();
+        }
+    }
+}
+
+public static class IListExtensions
+{
+    /// <summary>
+    /// Shuffles the element order of the specified list.
+    /// </summary>
+    public static void Shuffle<T>(this IList<T> ts)
+    {
+        var count = ts.Count;
+        var last = count - 1;
+        for (var i = 0; i < last; ++i)
+        {
+            var r = UnityEngine.Random.Range(i, count);
+            var tmp = ts[i];
+            ts[i] = ts[r];
+            ts[r] = tmp;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace Color_Clique
 
         public void SetScoreText(int score)
         {
-            scoreText.text = "Score: " + score.ToString();
+            scoreText.text = score.ToString();
         }
 
         public void SetScoreToAdd(float score)

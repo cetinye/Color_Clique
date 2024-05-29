@@ -20,6 +20,11 @@ public class Slot : MonoBehaviour
         itemRenderer.sprite = sprite;
     }
 
+    public void SetItemSpriteOff()
+    {
+        itemRenderer.enabled = false;
+    }
+
     public Sprite GetItemSprite()
     {
         return itemRenderer.sprite;

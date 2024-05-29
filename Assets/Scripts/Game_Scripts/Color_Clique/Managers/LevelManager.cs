@@ -44,6 +44,7 @@ namespace Color_Clique
         [SerializeField] Wheel wheel;
         [SerializeField] SpriteRenderer selectedSp;
         [SerializeField] SpriteRenderer selectedSpBG;
+        [SerializeField] Slot selectedSlot;
         [SerializeField] Color selectedColor;
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
@@ -57,11 +58,13 @@ namespace Color_Clique
         void Awake()
         {
             instance = this;
+
+            scores.Clear();
         }
 
         void Start()
         {
-            StartGame();
+            StartCoroutine(StartGame());
         }
 
         void Update()
@@ -69,7 +72,7 @@ namespace Color_Clique
             LevelTimer();
         }
 
-        private void StartGame()
+        IEnumerator StartGame()
         {
             // start from one level down
             levelId--;
@@ -77,11 +80,15 @@ namespace Color_Clique
 
             AssignLevelVariables();
             AssignWheelVariables();
+            levelTimer = levelSO.totalTime;
             SetMoveLimit();
             wheel.Initialize();
             SelectItem();
 
             OpenCurtains();
+
+            yield return new WaitForSeconds(1.1f);
+
             isTimerOn = true;
             isClickable = true;
         }
@@ -97,7 +104,6 @@ namespace Color_Clique
             isWheelBarReversalEnabled = levelSO.isWheelBarReversalEnabled;
             minChangeFrequency = levelSO.minChangeFrequency;
             maxChangeFrequency = levelSO.maxChangeFrequency;
-            levelTimer = levelSO.totalTime;
             isComboScoreEnabled = levelSO.isComboScoreEnabled;
             maxScore = levelSO.maxScore;
             scorePerCorrectOperation = levelSO.scorePerCorrectOperation;
@@ -145,18 +151,13 @@ namespace Color_Clique
         {
             isClickable = false;
 
-            if (selectedSp.sprite == clickedImage && selectedColor == clickedColor)
+            if (selectedSp.enabled == true && selectedSp.sprite == clickedImage && selectedColor == clickedColor)
             {
-                correctCount++;
-                comboCounter++;
-                levelUpCounter++;
-                uiManager.UpdateStats(correctCount, wrongCount);
-                wheel.SetNeedleColor(Color.green, 0.5f);
-
-                if (comboCounter >= 2)
-                {
-                    PlayCombo();
-                }
+                Correct();
+            }
+            else if (selectedSp.enabled == false && selectedColor == clickedColor)
+            {
+                Correct();
             }
             else
             {
@@ -176,6 +177,21 @@ namespace Color_Clique
             }
 
             CheckLevel();
+        }
+
+        private void Correct()
+        {
+            correctCount++;
+            comboCounter++;
+            levelUpCounter++;
+            uiManager.UpdateStats(correctCount, wrongCount);
+            wheel.SetNeedleColor(Color.green, 0.5f);
+            SelectItem();
+
+            if (comboCounter >= 2)
+            {
+                PlayCombo();
+            }
         }
 
         public void PlayCombo()
@@ -231,9 +247,9 @@ namespace Color_Clique
             if (levelUpCounter == 3)
             {
                 levelUpCounter = 0;
+                CalculateLevelScore();
                 SetLevel(++levelId);
                 CrowdClap();
-                CalculateLevelScore();
                 uiManager.SetScoreText(GetTotalScore());
             }
 
@@ -258,11 +274,17 @@ namespace Color_Clique
 
         public void SelectItem()
         {
-            Slot selectedSlot = wheel.SelectSlot();
+            Slot previousSlot = selectedSlot;
 
-            selectedSp.sprite = selectedSlot.GetItemSprite();
-            selectedColor = selectedSlot.GetSlotColor();
-            selectedSpBG.color = selectedColor;
+            do
+            {
+                selectedSlot = wheel.SelectSlot();
+                selectedSp.sprite = selectedSlot.GetItemSprite();
+                selectedColor = selectedSlot.GetSlotColor();
+                selectedSpBG.color = selectedColor;
+
+            } while (previousSlot == selectedSlot);
+
         }
 
         public void SetIsClickable(bool state)
@@ -273,6 +295,16 @@ namespace Color_Clique
         public Wheel GetWheel()
         {
             return wheel;
+        }
+
+        public int GetNumberOfColors()
+        {
+            return numberOfColors;
+        }
+
+        public int GetShapeCount()
+        {
+            return shapeCount;
         }
 
         #region Animations

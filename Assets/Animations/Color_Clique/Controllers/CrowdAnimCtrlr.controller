@@ -34,7 +34,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Shout
-  m_Speed: 0.5
+  m_Speed: 0.33
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 1316544778409427425}
@@ -155,7 +155,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Clap
-  m_Speed: 0.5
+  m_Speed: 0.4
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: 5923251238980674568}
