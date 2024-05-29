@@ -50,6 +50,7 @@ namespace Color_Clique
         [SerializeField] private Animator crowdAnimator;
         [SerializeField] private Animator curtainAnimator;
         [SerializeField] private ParticleSystem combo;
+        [SerializeField] private List<ParticleSystem> confettis = new List<ParticleSystem>();
         [SerializeField] private Camera particleCam;
         [SerializeField] private TMPro.TMP_Text comboText;
 
@@ -196,6 +197,10 @@ namespace Color_Clique
             {
                 PlayCombo();
             }
+            if (levelUpCounter >= 10)
+            {
+                PlayConfettis();
+            }
         }
 
         public void Wrong()
@@ -208,13 +213,21 @@ namespace Color_Clique
             wheel.SetNeedleColor(Color.red, 0.5f);
         }
 
-        public void PlayCombo()
+        private void PlayCombo()
         {
             comboText.text = comboCounter.ToString() + "x Combo";
             particleCam.gameObject.SetActive(true);
             combo.Play();
             CancelInvoke(nameof(DisableParticleCam));
             Invoke(nameof(DisableParticleCam), 0.5f);
+        }
+
+        private void PlayConfettis()
+        {
+            foreach (ParticleSystem confetti in confettis)
+            {
+                confetti.Play();
+            }
         }
 
         private void DisableParticleCam()
