@@ -15,6 +15,7 @@ namespace Color_Clique
         [SerializeField] private List<LevelSO> levels = new List<LevelSO>();
 
         [Header("Scene Variables")]
+        [SerializeField] private float timePerQuestion;
         private int numberOfColors;
         private int shapeCount;
         private int wheelSegments;
@@ -91,6 +92,7 @@ namespace Color_Clique
 
             isTimerOn = true;
             isClickable = true;
+            wheel.StartTimer(LevelManager.instance.GetTimePerQuestion());
         }
 
         private void AssignLevelVariables()
@@ -122,7 +124,12 @@ namespace Color_Clique
             if (!isTimerOn) return;
 
             levelTimer -= Time.deltaTime;
-            scoreToAdd -= Time.deltaTime;
+
+            if (scoreToAdd > 0)
+            {
+                scoreToAdd -= Time.deltaTime;
+                scoreToAdd = Mathf.Max(scoreToAdd, 0);
+            }
 
             if (levelTimer < 0)
             {
@@ -147,25 +154,21 @@ namespace Color_Clique
             moveCounter = 0;
         }
 
-        public void Check(Sprite clickedImage, Color clickedColor)
+        public void Check(Sprite clickedImage, Color clickedColor, bool isTimeOut = false)
         {
             isClickable = false;
 
-            if (selectedSp.enabled == true && selectedSp.sprite == clickedImage && selectedColor == clickedColor)
+            if (!isTimeOut && selectedSp.enabled == true && selectedSp.sprite == clickedImage && selectedColor == clickedColor)
             {
                 Correct();
             }
-            else if (selectedSp.enabled == false && selectedColor == clickedColor)
+            else if (!isTimeOut && selectedSp.enabled == false && selectedColor == clickedColor)
             {
                 Correct();
             }
             else
             {
-                wrongCount++;
-                comboCounter = 0;
-                levelDownCounter++;
-                uiManager.UpdateStats(correctCount, wrongCount);
-                wheel.SetNeedleColor(Color.red, 0.5f);
+                Wrong();
             }
 
             //select new item if move limit reached
@@ -177,6 +180,7 @@ namespace Color_Clique
             }
 
             CheckLevel();
+            wheel.StartTimer(LevelManager.instance.GetTimePerQuestion());
         }
 
         private void Correct()
@@ -192,6 +196,16 @@ namespace Color_Clique
             {
                 PlayCombo();
             }
+        }
+
+        public void Wrong()
+        {
+            Debug.Log("WRONG");
+            wrongCount++;
+            comboCounter = 0;
+            levelDownCounter++;
+            uiManager.UpdateStats(correctCount, wrongCount);
+            wheel.SetNeedleColor(Color.red, 0.5f);
         }
 
         public void PlayCombo()
@@ -284,7 +298,6 @@ namespace Color_Clique
                 selectedSpBG.color = selectedColor;
 
             } while (previousSlot == selectedSlot);
-
         }
 
         public void SetIsClickable(bool state)
@@ -305,6 +318,11 @@ namespace Color_Clique
         public int GetShapeCount()
         {
             return shapeCount;
+        }
+
+        public float GetTimePerQuestion()
+        {
+            return timePerQuestion;
         }
 
         #region Animations

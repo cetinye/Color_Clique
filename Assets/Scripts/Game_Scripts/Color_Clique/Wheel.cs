@@ -28,10 +28,34 @@ namespace Color_Clique
         [SerializeField] private List<Sprite> usedItems = new List<Sprite>();
         [SerializeField] private List<Color> usedColors = new List<Color>();
 
+        [Header("Slider")]
+        [SerializeField] private UnityEngine.UI.Slider slider;
+        private float passedTime;
+        private float timePerQuestion;
+        private bool isSliderActive;
+
         void Awake()
         {
+            isSliderActive = false;
+
             items.Shuffle();
             colors.Shuffle();
+        }
+
+        void Update()
+        {
+            if (!isSliderActive) return;
+
+            passedTime += Time.deltaTime;
+            slider.value = 1f - (passedTime / timePerQuestion);
+
+            if (slider.value <= 0)
+            {
+                isSliderActive = false;
+                passedTime = 0f;
+                slider.value = 1f - (passedTime / timePerQuestion);
+                LevelManager.instance.Check(null, Color.clear, true);
+            }
         }
 
         public void AssignWheelVariables(int numberOfSlots, float needleRotateSpeed)
@@ -118,6 +142,14 @@ namespace Color_Clique
 
             usedColors.Add(randColor);
             return randColor;
+        }
+
+        public void StartTimer(float value)
+        {
+            passedTime = 0f;
+            slider.value = 1f;
+            timePerQuestion = value;
+            isSliderActive = true;
         }
 
         private void Reset()
