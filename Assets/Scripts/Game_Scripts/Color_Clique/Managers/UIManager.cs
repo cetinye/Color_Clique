@@ -12,6 +12,7 @@ namespace Color_Clique
         [SerializeField] TMP_Text correctText;
         [SerializeField] TMP_Text wrongText;
         [SerializeField] TMP_Text scoreText;
+        [SerializeField] TMP_Text scoreToAddText;
 
         [Header("Flash Variables")]
         [SerializeField] private float flashInterval = 0.5f;
@@ -41,6 +42,11 @@ namespace Color_Clique
         public void SetScoreText(int score)
         {
             scoreText.text = "Score: " + score.ToString();
+        }
+
+        public void SetScoreToAdd(float score)
+        {
+            scoreToAddText.text = score.ToString("F0");
         }
 
         public void FlashRed()

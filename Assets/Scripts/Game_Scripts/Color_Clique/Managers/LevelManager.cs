@@ -36,6 +36,7 @@ namespace Color_Clique
         private int moveCounter;
         private int levelUpCounter;
         private int levelDownCounter;
+        private float scoreToAdd;
         private List<int> scores = new List<int>();
 
         [Header("Scene Components")]
@@ -101,6 +102,8 @@ namespace Color_Clique
             maxScore = levelSO.maxScore;
             scorePerCorrectOperation = levelSO.scorePerCorrectOperation;
             comboMultiplier = levelSO.comboMultiplier;
+
+            scoreToAdd = levelSO.maxScore;
         }
 
         private void AssignWheelVariables()
@@ -113,6 +116,7 @@ namespace Color_Clique
             if (!isTimerOn) return;
 
             levelTimer -= Time.deltaTime;
+            scoreToAdd -= Time.deltaTime;
 
             if (levelTimer < 0)
             {
@@ -128,6 +132,7 @@ namespace Color_Clique
             }
 
             uiManager.SetTimeText(levelTimer);
+            uiManager.SetScoreToAdd(scoreToAdd);
         }
 
         private void SetMoveLimit()
@@ -202,7 +207,8 @@ namespace Color_Clique
 
         private void CalculateLevelScore()
         {
-            int levelScore = Mathf.CeilToInt(Mathf.Min((correctCount - wrongCount) * scorePerCorrectOperation, maxScore)) + (comboCounter * comboMultiplier);
+            int levelScore = Mathf.CeilToInt(((correctCount - wrongCount) * scorePerCorrectOperation) + (comboCounter * comboMultiplier) + scoreToAdd);
+            levelScore = Mathf.Min(levelScore, maxScore);
             levelScore = Mathf.Max(levelScore, 0);
             levelScore = Mathf.Clamp(levelScore, 0, 1000);
             scores.Add(levelScore);
@@ -217,7 +223,7 @@ namespace Color_Clique
                 total += scores[i];
             }
 
-            return Mathf.Max(Mathf.CeilToInt(total / scores.Count), 0);
+            return Mathf.Clamp(Mathf.Max(Mathf.CeilToInt(total / scores.Count), 0), 0, 1000);
         }
 
         private void CheckLevel()
