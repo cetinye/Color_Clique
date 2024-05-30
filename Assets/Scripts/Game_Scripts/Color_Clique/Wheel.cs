@@ -103,8 +103,9 @@ namespace Color_Clique
             return spawnedWheel.GetRandomSlot();
         }
 
-        public void GiveFeedback()
+        public void GiveFeedback(Color feedbackColor)
         {
+            feedbackRenderer.color = feedbackColor;
             StopCoroutine(FlashFeedback());
             StartCoroutine(FlashFeedback());
         }

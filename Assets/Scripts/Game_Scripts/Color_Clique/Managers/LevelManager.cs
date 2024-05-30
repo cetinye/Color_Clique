@@ -199,7 +199,7 @@ namespace Color_Clique
             levelUpCounter++;
             uiManager.UpdateStats(correctCount, wrongCount);
             wheel.SetNeedleColor(Color.green, 0.5f);
-            wheel.GiveFeedback();
+            wheel.GiveFeedback(Color.green);
             AudioManager.instance.PlayCorrect(Mathf.Clamp(comboCounter, 0, 7));
             SelectItem();
 
@@ -221,7 +221,7 @@ namespace Color_Clique
             levelDownCounter++;
             uiManager.UpdateStats(correctCount, wrongCount);
             wheel.SetNeedleColor(Color.red, 0.5f);
-            wheel.GiveFeedback();
+            wheel.GiveFeedback(Color.red);
             AudioManager.instance.PlayOneShot(SoundType.Confetti);
         }
 
