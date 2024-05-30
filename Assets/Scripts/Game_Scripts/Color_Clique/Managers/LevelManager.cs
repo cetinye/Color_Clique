@@ -27,6 +27,7 @@ namespace Color_Clique
         private int maxScore;
         private float scorePerCorrectOperation;
         private int comboMultiplier;
+        [HideInInspector] public bool IsTimerOn => isTimerOn;
         private bool isTimerOn;
         private float levelTimer;
         private int correctCount = 0;
@@ -94,6 +95,10 @@ namespace Color_Clique
             isTimerOn = true;
             isClickable = true;
             wheel.StartTimer(LevelManager.instance.GetTimePerQuestion());
+
+            AudioManager.instance.Play(SoundType.Background);
+            AudioManager.instance.Play(SoundType.Ambient);
+            AudioManager.instance.PlayTickSpeed(levelSO.spinSpeedMultiplier);
         }
 
         private void AssignLevelVariables()
@@ -113,6 +118,9 @@ namespace Color_Clique
             comboMultiplier = levelSO.comboMultiplier;
 
             scoreToAdd = levelSO.maxScore;
+
+            if (isTimerOn)
+                AudioManager.instance.PlayTickSpeed(levelSO.spinSpeedMultiplier);
         }
 
         private void AssignWheelVariables()
@@ -191,6 +199,8 @@ namespace Color_Clique
             levelUpCounter++;
             uiManager.UpdateStats(correctCount, wrongCount);
             wheel.SetNeedleColor(Color.green, 0.5f);
+            wheel.GiveFeedback();
+            AudioManager.instance.PlayCorrect(Mathf.Clamp(comboCounter, 0, 7));
             SelectItem();
 
             if (comboCounter >= 2)
@@ -211,6 +221,8 @@ namespace Color_Clique
             levelDownCounter++;
             uiManager.UpdateStats(correctCount, wrongCount);
             wheel.SetNeedleColor(Color.red, 0.5f);
+            wheel.GiveFeedback();
+            AudioManager.instance.PlayOneShot(SoundType.Confetti);
         }
 
         private void PlayCombo()
@@ -224,6 +236,8 @@ namespace Color_Clique
 
         private void PlayConfettis()
         {
+            AudioManager.instance.PlayOneShot(SoundType.Confetti);
+
             foreach (ParticleSystem confetti in confettis)
             {
                 confetti.Play();
@@ -342,16 +356,19 @@ namespace Color_Clique
 
         public void OpenCurtains()
         {
+            AudioManager.instance.PlayAfterXSeconds(SoundType.CurtainOpen, 0.2f);
             curtainAnimator.Play("CurtainOpen", -1, 0.0f);
         }
 
         public void CrowdClap()
         {
+            AudioManager.instance.PlayOneShot(SoundType.Clap);
             crowdAnimator.Play("Clap", -1, 0.0f);
         }
 
         public void CrowdShout()
         {
+            AudioManager.instance.PlayOneShot(SoundType.Shout);
             crowdAnimator.Play("Shout", -1, 0.0f);
         }
 

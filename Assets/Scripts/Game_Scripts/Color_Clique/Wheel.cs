@@ -1,6 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
 using System.Collections.Generic;
+using System.Collections;
 
 namespace Color_Clique
 {
@@ -9,6 +10,7 @@ namespace Color_Clique
         public int numberOfSlots;
         public Transform center;
         [SerializeField] private Needle needle;
+        [SerializeField] private SpriteRenderer feedbackRenderer;
         private WheelPart spawnedWheel;
         private int numberOfColors;
         private int shapeCount;
@@ -101,6 +103,12 @@ namespace Color_Clique
             return spawnedWheel.GetRandomSlot();
         }
 
+        public void GiveFeedback()
+        {
+            StopCoroutine(FlashFeedback());
+            StartCoroutine(FlashFeedback());
+        }
+
         public void SetNeedleColor(Color color, float duration)
         {
             needle.SetNeedleColor(color, duration);
@@ -161,6 +169,21 @@ namespace Color_Clique
         public void ResetColors()
         {
             usedColors.Clear();
+        }
+
+        IEnumerator FlashFeedback()
+        {
+            feedbackRenderer.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            feedbackRenderer.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            feedbackRenderer.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            feedbackRenderer.enabled = false;
+            yield return new WaitForSeconds(0.2f);
+            feedbackRenderer.enabled = true;
+            yield return new WaitForSeconds(0.2f);
+            feedbackRenderer.enabled = false;
         }
     }
 }

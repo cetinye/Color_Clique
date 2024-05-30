@@ -13,7 +13,8 @@ namespace Color_Clique
 
         private void Update()
         {
-            transform.RotateAround(wheel.center.position, new Vector3(0, 0, 1), needleRotateSpeed * Time.deltaTime);
+            if (LevelManager.instance.IsTimerOn)
+                transform.RotateAround(wheel.center.position, new Vector3(0, 0, 1), needleRotateSpeed * Time.deltaTime);
         }
 
         void OnCollisionEnter2D(Collision2D other)

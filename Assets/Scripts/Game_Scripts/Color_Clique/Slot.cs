@@ -1,32 +1,35 @@
 using UnityEngine;
 
-public class Slot : MonoBehaviour
+namespace Color_Clique
 {
-    [SerializeField] private SpriteRenderer slotRenderer;
-    [SerializeField] private SpriteRenderer itemRenderer;
-
-    public void SetSlotColor(Color newColor)
+    public class Slot : MonoBehaviour
     {
-        slotRenderer.color = newColor;
-    }
+        [SerializeField] private SpriteRenderer slotRenderer;
+        [SerializeField] private SpriteRenderer itemRenderer;
 
-    public Color GetSlotColor()
-    {
-        return slotRenderer.color;
-    }
+        public void SetSlotColor(Color newColor)
+        {
+            slotRenderer.color = newColor;
+        }
 
-    public void SetItemSprite(Sprite sprite)
-    {
-        itemRenderer.sprite = sprite;
-    }
+        public Color GetSlotColor()
+        {
+            return slotRenderer.color;
+        }
 
-    public void SetItemSpriteOff()
-    {
-        itemRenderer.enabled = false;
-    }
+        public void SetItemSprite(Sprite sprite)
+        {
+            itemRenderer.sprite = sprite;
+        }
 
-    public Sprite GetItemSprite()
-    {
-        return itemRenderer.sprite;
+        public void SetItemSpriteOff()
+        {
+            itemRenderer.enabled = false;
+        }
+
+        public Sprite GetItemSprite()
+        {
+            return itemRenderer.sprite;
+        }
     }
 }
