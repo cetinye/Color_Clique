@@ -143,7 +143,9 @@ namespace Color_Clique
             if (levelTimer < 0)
             {
                 isTimerOn = false;
+                wheel.SetSliderState(false);
                 levelTimer = 0;
+                CloseCurtains();
             }
 
             if (levelTimer <= 5.2f && isFlashable)
@@ -358,6 +360,12 @@ namespace Color_Clique
         {
             AudioManager.instance.PlayAfterXSeconds(SoundType.CurtainOpen, 0.2f);
             curtainAnimator.Play("CurtainOpen", -1, 0.0f);
+        }
+
+        public void CloseCurtains()
+        {
+            AudioManager.instance.PlayAfterXSeconds(SoundType.CurtainOpen, 0.2f);
+            curtainAnimator.Play("CurtainClose", -1, 0f);
         }
 
         public void CrowdClap()

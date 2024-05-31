@@ -125,6 +125,11 @@ namespace Color_Clique
             return needle.GetOverlappingSlot();
         }
 
+        public void SetSliderState(bool state)
+        {
+            isSliderActive = state;
+        }
+
         public Sprite GetRandomItem()
         {
             Sprite item;
