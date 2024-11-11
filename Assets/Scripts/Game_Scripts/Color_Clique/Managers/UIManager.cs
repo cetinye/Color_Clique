@@ -11,8 +11,8 @@ namespace Color_Clique
         [SerializeField] TMP_Text levelTimeText;
         [SerializeField] TMP_Text correctText;
         [SerializeField] TMP_Text wrongText;
-        [SerializeField] TMP_Text scoreText;
-        [SerializeField] TMP_Text scoreToAddText;
+        [SerializeField] TMP_Text stageScoreText;
+        [SerializeField] TMP_Text averageScoreText;
 
         [Header("Flash Variables")]
         [SerializeField] private float flashInterval = 0.5f;
@@ -39,14 +39,14 @@ namespace Color_Clique
             wrongText.text = "Wrong: " + wrong.ToString();
         }
 
-        public void SetScoreText(int score)
+        public void SetStageScoreText(int score)
         {
-            scoreText.text = score.ToString();
+            stageScoreText.text = score.ToString();
         }
 
-        public void SetScoreToAdd(float score)
+        public void SetAverageScoreText(int score)
         {
-            scoreToAddText.text = score.ToString("F0");
+            averageScoreText.text = score.ToString();
         }
 
         public void FlashRed()

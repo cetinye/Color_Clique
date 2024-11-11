@@ -8224,29 +8224,56 @@ MonoBehaviour:
   levelId: 0
   levelSO: {fileID: 0}
   levels:
-  - {fileID: 11400000, guid: 99a36c6cdeaa1c34ca6624703dbde87c, type: 2}
-  - {fileID: 11400000, guid: 656f384af1e18db459082d853645516e, type: 2}
-  - {fileID: 11400000, guid: 1da114789bbadb645a62cd3005013b44, type: 2}
-  - {fileID: 11400000, guid: 229f2435bf91c03498241f3fb4c074bb, type: 2}
-  - {fileID: 11400000, guid: 814ccb6c97a6cf04b8930dd34bc76c51, type: 2}
-  - {fileID: 11400000, guid: c409d561168fe98499716208b4ac2837, type: 2}
-  - {fileID: 11400000, guid: 6436514121ff91b4b84f1ba4a4c16806, type: 2}
-  - {fileID: 11400000, guid: f1fbeb2704bd7b74591d1c24b53e3313, type: 2}
-  - {fileID: 11400000, guid: 2687d76e1fd73054790779ce19f0a0e9, type: 2}
-  - {fileID: 11400000, guid: 233fa06959590ac469e50d68410bd320, type: 2}
-  - {fileID: 11400000, guid: cb9cd5dced0acbc42a28245c051f9f94, type: 2}
-  - {fileID: 11400000, guid: d3ad9191480f14d428a620450a3adab6, type: 2}
-  - {fileID: 11400000, guid: 53525438a081fbb469d1f97f9c42ff49, type: 2}
-  - {fileID: 11400000, guid: a6700fab00c84374a89461f2c498bfe6, type: 2}
-  - {fileID: 11400000, guid: 702c753cfe0b30043bf85e5554805af4, type: 2}
-  - {fileID: 11400000, guid: e6c2f3c3044c6a04d8d1be990fe5a5fa, type: 2}
-  - {fileID: 11400000, guid: 197f6b272173a3c4296e38963f15a58d, type: 2}
-  - {fileID: 11400000, guid: 3f3353d2b004b6b44bd841c5f3f4c46c, type: 2}
-  - {fileID: 11400000, guid: c84cda8e665386c4fb278286aa462391, type: 2}
-  - {fileID: 11400000, guid: 4889b825b801db143892ebf168e2697a, type: 2}
-  - {fileID: 11400000, guid: d96ddab0d51d1584184f11261873f2ac, type: 2}
-  - {fileID: 11400000, guid: 2fef4568ca5da054eb24b6bc6797da84, type: 2}
-  timePerQuestion: 10
+  - {fileID: 11400000, guid: 13c897972b8ea7041886fa8e93bda3c1, type: 2}
+  - {fileID: 11400000, guid: a6e86de1a7ab6c740979c2b61a5f2a00, type: 2}
+  - {fileID: 11400000, guid: 0f544bfa87501184881b74c94f49cec7, type: 2}
+  - {fileID: 11400000, guid: a09fe8f0d0dcdb74aa89bced0e045754, type: 2}
+  - {fileID: 11400000, guid: 49490ff92cf8f894caeeee630b5ad1ef, type: 2}
+  - {fileID: 11400000, guid: 0637b2c1389f8e441b6846124a4b0497, type: 2}
+  - {fileID: 11400000, guid: 64a0e6dc28e86f842817006197c604c7, type: 2}
+  - {fileID: 11400000, guid: c5545fddccfe25e41aa0f8d83081dfa0, type: 2}
+  - {fileID: 11400000, guid: 9e10fc69e623b2741b1e967b0e23168b, type: 2}
+  - {fileID: 11400000, guid: da900553999e6d342a2866d13bdcc5d7, type: 2}
+  - {fileID: 11400000, guid: 926c760f978aff04fa9535cc04011142, type: 2}
+  - {fileID: 11400000, guid: 6ef7d9ab2f808da49879048921d02c76, type: 2}
+  - {fileID: 11400000, guid: 85e6ee890492d114687bde8f9a805904, type: 2}
+  - {fileID: 11400000, guid: c1c2c8f72ca8366439cc6b1a1e61226a, type: 2}
+  - {fileID: 11400000, guid: 6bc99a0e8ac4924449baca6796fa4380, type: 2}
+  - {fileID: 11400000, guid: 9beec97da2f3fe54ca0b87f9307a53c8, type: 2}
+  - {fileID: 11400000, guid: ed3c792f940c537428b17ed03a1fc4ce, type: 2}
+  - {fileID: 11400000, guid: ec5798e47c46e724ba267935b2ed8371, type: 2}
+  - {fileID: 11400000, guid: 17f5f3dbe1abb0d46b6292e73bff9989, type: 2}
+  - {fileID: 11400000, guid: 3995b6a21ca06044f872f1c497bf4367, type: 2}
+  - {fileID: 11400000, guid: 7ffc5ff3f6c9e7c40b0c3cacd3eab3ca, type: 2}
+  - {fileID: 11400000, guid: 09122b22e89eea644b2aa519b236a425, type: 2}
+  - {fileID: 11400000, guid: 63110286996c62341a29bc4cc368c3cc, type: 2}
+  - {fileID: 11400000, guid: ce98d01cb96e67f44b57e245791dc4b4, type: 2}
+  - {fileID: 11400000, guid: 05f2aad9c2046cb459a915824813185a, type: 2}
+  - {fileID: 11400000, guid: 454bdb24353fa594997c1d67eade4643, type: 2}
+  - {fileID: 11400000, guid: b7e475fb8d554584ab938974c66d3686, type: 2}
+  - {fileID: 11400000, guid: 250de26e12c64f04f988336bea67a8db, type: 2}
+  - {fileID: 11400000, guid: f8c3d7102d09da04e80f19bbd918befd, type: 2}
+  - {fileID: 11400000, guid: bc0f694d958566844bb77ac3068b77a4, type: 2}
+  - {fileID: 11400000, guid: 769a81bccdb10a54eb82fe9bb717b8ed, type: 2}
+  - {fileID: 11400000, guid: 4d5e9585c8ab8e740928733603fcc7b5, type: 2}
+  - {fileID: 11400000, guid: a7508e2dcb4a14d48a2e828c7f7cdaa5, type: 2}
+  - {fileID: 11400000, guid: e37b77f203de9ff40b8df6975b95dada, type: 2}
+  - {fileID: 11400000, guid: ee04411210c2a874da917417eafbb700, type: 2}
+  - {fileID: 11400000, guid: 9e666a4899ed7f44bad34a413ce590f9, type: 2}
+  - {fileID: 11400000, guid: 75e5055d86064d44ab61f7eed8a8711a, type: 2}
+  - {fileID: 11400000, guid: e81395f455bb16743a87fdf54168e086, type: 2}
+  - {fileID: 11400000, guid: 4484b034916a9f44ea75742654cd3391, type: 2}
+  - {fileID: 11400000, guid: 77a1c6d59212c1d4d9151a30aae120e3, type: 2}
+  - {fileID: 11400000, guid: 4c727384a523e1f42881b0b189518aa8, type: 2}
+  - {fileID: 11400000, guid: 4d5ca234a91d4bb48a0cce1a5823b192, type: 2}
+  - {fileID: 11400000, guid: 58d28c67a841f3b42b7438fa859a743d, type: 2}
+  - {fileID: 11400000, guid: c3d3c4c8fc71edc47b69026bfe4abf4b, type: 2}
+  - {fileID: 11400000, guid: 15f9a0e3b93fd694bbdf909555251c3a, type: 2}
+  - {fileID: 11400000, guid: 7cdfb4fec25fd9d408ae62d4d126156c, type: 2}
+  - {fileID: 11400000, guid: b4ec4178839b80a41bc6bfa71d8f1b5e, type: 2}
+  - {fileID: 11400000, guid: 7529f49124fbf6a43b6afdf11d5a5d48, type: 2}
+  - {fileID: 11400000, guid: c03876d48a02b6b438e685be3b876e4e, type: 2}
+  - {fileID: 11400000, guid: b05e43b1fbf139944bdb9d224323a024, type: 2}
   uiManager: {fileID: 1293073493}
   wheel: {fileID: 1992672651}
   selectedSp: {fileID: 17473975}
@@ -8524,7 +8551,7 @@ GameObject:
   - component: {fileID: 1272239000}
   - component: {fileID: 1272238999}
   m_Layer: 5
-  m_Name: ScoreToAdd
+  m_Name: StageScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8658,7 +8685,7 @@ GameObject:
   - component: {fileID: 1277189228}
   - component: {fileID: 1277189227}
   m_Layer: 5
-  m_Name: Score
+  m_Name: AverageScore
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -8827,8 +8854,8 @@ MonoBehaviour:
   levelTimeText: {fileID: 122850809}
   correctText: {fileID: 460523806}
   wrongText: {fileID: 552423106}
-  scoreText: {fileID: 1277189227}
-  scoreToAddText: {fileID: 1272238999}
+  stageScoreText: {fileID: 1272238999}
+  averageScoreText: {fileID: 1277189227}
   flashInterval: 0.5
   levelIdText: {fileID: 1405024225}
   levelDownText: {fileID: 1811021620}
@@ -9476,7 +9503,7 @@ GameObject:
   - component: {fileID: 1736646244}
   - component: {fileID: 1736646243}
   m_Layer: 5
-  m_Name: StageScore
+  m_Name: StageScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9782,7 +9809,7 @@ GameObject:
   - component: {fileID: 1843527952}
   - component: {fileID: 1843527951}
   m_Layer: 5
-  m_Name: AverageScore
+  m_Name: AverageScoreText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

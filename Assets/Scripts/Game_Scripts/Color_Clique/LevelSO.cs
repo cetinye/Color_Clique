@@ -9,13 +9,14 @@ namespace Color_Clique
         public int shapeCount;
         public int wheelSegments;
         public float spinSpeedMultiplier;
+        public float answerTime;
         public bool isWheelBarReversalEnabled;
         public int minChangeFrequency;
         public int maxChangeFrequency;
-        public int totalTime;
-        public bool isComboScoreEnabled;
-        public int maxScore;
-        public float scorePerCorrectOperation;
-        public int comboMultiplier;
+        public int levelUpCriteria;
+        public int levelDownCriteria;
+        public int comboScore;
+        public int pointsPerQuestion;
+        public int penaltyPoints;
     }
 }

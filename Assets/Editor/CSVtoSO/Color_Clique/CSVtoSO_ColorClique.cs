@@ -5,10 +5,10 @@ using System;
 
 namespace Color_Clique
 {
-    public class CSVtoSO_ColorClique
+    public class CSVtoSO
     {
         //Check .csv path
-        private static string CSVPath = "/Editor/CSVtoSO/Color_Clique/LevelCSV_ColorClique.csv";
+        private static string CSVPath = "/Editor/CSVtoSO/Color_Clique/LevelCSV.csv";
 
         [MenuItem("Tools/CSV_to_SO/Color_Clique/Generate")]
         public static void GenerateSO()

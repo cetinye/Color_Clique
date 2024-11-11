@@ -15,7 +15,7 @@ namespace Color_Clique
         [SerializeField] private List<LevelSO> levels = new List<LevelSO>();
 
         [Header("Scene Variables")]
-        [SerializeField] private float timePerQuestion;
+        private float timePerQuestion;
         private int numberOfColors;
         private int shapeCount;
         private int wheelSegments;
@@ -23,23 +23,18 @@ namespace Color_Clique
         private bool isWheelBarReversalEnabled;
         private int minChangeFrequency;
         private int maxChangeFrequency;
-        private bool isComboScoreEnabled;
-        private int maxScore;
-        private float scorePerCorrectOperation;
-        private int comboMultiplier;
         [HideInInspector] public bool IsTimerOn => isTimerOn;
         private bool isTimerOn;
         private float levelTimer;
         private int correctCount = 0;
         private int wrongCount = 0;
         private int comboCounter = 0;
+        private int totalCorrect, totalWrong, totalCombo;
         private bool isClickable;
         private int moveLimitForChange;
         private int moveCounter;
         private int levelUpCounter;
         private int levelDownCounter;
-        private float scoreToAdd;
-        private List<int> scores = new List<int>();
 
         [Header("Scene Components")]
         [SerializeField] UIManager uiManager;
@@ -60,9 +55,14 @@ namespace Color_Clique
 
         void Awake()
         {
-            instance = this;
-
-            scores.Clear();
+            if (instance != null && instance != this)
+            {
+                Destroy(this);
+            }
+            else
+            {
+                instance = this;
+            }
         }
 
         void Start()
@@ -79,11 +79,10 @@ namespace Color_Clique
         {
             // start from one level down
             levelId--;
-            levelId = Mathf.Clamp(levelId, 0, levels.Count - 1);
 
             AssignLevelVariables();
             AssignWheelVariables();
-            levelTimer = levelSO.totalTime;
+            levelTimer = 90;
             SetMoveLimit();
             wheel.Initialize();
             SelectItem();
@@ -103,21 +102,17 @@ namespace Color_Clique
 
         private void AssignLevelVariables()
         {
-            levelSO = levels[levelId];
+            levelId = Mathf.Clamp(levelId, 1, levels.Count);
+            levelSO = levels[levelId - 1];
 
             numberOfColors = levelSO.numberOfColors;
             shapeCount = levelSO.shapeCount;
             wheelSegments = levelSO.wheelSegments;
             rotationSpeed = 2 * levelSO.spinSpeedMultiplier;
+            timePerQuestion = levelSO.answerTime;
             isWheelBarReversalEnabled = levelSO.isWheelBarReversalEnabled;
             minChangeFrequency = levelSO.minChangeFrequency;
             maxChangeFrequency = levelSO.maxChangeFrequency;
-            isComboScoreEnabled = levelSO.isComboScoreEnabled;
-            maxScore = levelSO.maxScore;
-            scorePerCorrectOperation = levelSO.scorePerCorrectOperation;
-            comboMultiplier = levelSO.comboMultiplier;
-
-            scoreToAdd = levelSO.maxScore;
 
             if (isTimerOn)
                 AudioManager.instance.PlayTickSpeed(levelSO.spinSpeedMultiplier);
@@ -134,12 +129,6 @@ namespace Color_Clique
 
             levelTimer -= Time.deltaTime;
 
-            if (scoreToAdd > 0)
-            {
-                scoreToAdd -= Time.deltaTime;
-                scoreToAdd = Mathf.Max(scoreToAdd, 0);
-            }
-
             if (levelTimer < 0)
             {
                 isTimerOn = false;
@@ -155,8 +144,7 @@ namespace Color_Clique
                 uiManager.FlashRed();
             }
 
-            uiManager.SetTimeText(levelTimer);
-            uiManager.SetScoreToAdd(scoreToAdd);
+            uiManager.SetTimeText(levelTimer); ;
         }
 
         private void SetMoveLimit()
@@ -191,13 +179,16 @@ namespace Color_Clique
             }
 
             CheckLevel();
-            wheel.StartTimer(LevelManager.instance.GetTimePerQuestion());
+            wheel.StartTimer(GetTimePerQuestion());
         }
 
         private void Correct()
         {
             correctCount++;
+            totalCorrect++;
             comboCounter++;
+            totalCombo++;
+
             levelUpCounter++;
             uiManager.UpdateStats(correctCount, wrongCount);
             wheel.SetNeedleColor(Color.green, 0.5f);
@@ -217,9 +208,10 @@ namespace Color_Clique
 
         public void Wrong()
         {
-            Debug.Log("WRONG");
             wrongCount++;
+            totalWrong++;
             comboCounter = 0;
+
             levelDownCounter++;
             uiManager.UpdateStats(correctCount, wrongCount);
             wheel.SetNeedleColor(Color.red, 0.5f);
@@ -264,46 +256,43 @@ namespace Color_Clique
             }
         }
 
-        private void CalculateLevelScore()
+        private int CalculateLevelScore()
         {
-            int levelScore = Mathf.CeilToInt(((correctCount - wrongCount) * scorePerCorrectOperation) + (comboCounter * comboMultiplier) + scoreToAdd);
-            levelScore = Mathf.Min(levelScore, maxScore);
+            int levelScore = Mathf.CeilToInt((correctCount * levelSO.pointsPerQuestion) + (comboCounter * levelSO.comboScore) - (wrongCount * levelSO.penaltyPoints));
             levelScore = Mathf.Max(levelScore, 0);
-            levelScore = Mathf.Clamp(levelScore, 0, 1000);
-            scores.Add(levelScore);
+            return levelScore;
         }
 
         private int GetTotalScore()
         {
-            float total = 0;
-
-            for (int i = 0; i < scores.Count; i++)
-            {
-                total += scores[i];
-            }
-
-            return Mathf.Clamp(Mathf.Max(Mathf.CeilToInt(total / scores.Count), 0), 0, 1000);
+            float totalScore = (totalCorrect * levelSO.pointsPerQuestion) + (totalCombo * levelSO.comboScore) - (totalWrong * levelSO.penaltyPoints);
+            float maxInGame = ((totalCorrect + totalWrong) * levelSO.pointsPerQuestion) + (totalCombo * levelSO.comboScore);
+            int witScore = Mathf.Clamp(Mathf.CeilToInt(totalScore / maxInGame * 1000f), 0, 1000);
+            return witScore;
         }
 
         private void CheckLevel()
         {
-            if (levelUpCounter == 3)
+            if (levelUpCounter >= levelSO.levelUpCriteria)
             {
                 levelUpCounter = 0;
-                CalculateLevelScore();
+
                 SetLevel(++levelId);
                 CrowdClap();
-                uiManager.SetScoreText(GetTotalScore());
             }
 
-            if (levelDownCounter == 2)
+            if (levelDownCounter >= levelSO.levelDownCriteria)
             {
                 levelDownCounter = 0;
+
                 SetLevel(--levelId);
                 CrowdShout();
             }
 
-            uiManager.SetDebugTexts(levelId, levelDownCounter, levelUpCounter);
+            uiManager.SetStageScoreText(CalculateLevelScore());
+            uiManager.SetAverageScoreText(GetTotalScore());
+
+            // uiManager.SetDebugTexts(levelId, levelDownCounter, levelUpCounter);
         }
 
         private void SetLevel(int levelId)
